@@ -1,0 +1,206 @@
+$whiteColor: #ffffff;
+$blackColor: #000000;
+$lightGreen: #81ffca;
+$lightPink: #FFDCDC;
+$lightGray: #d1d1d1;
+$lighterGrayColor: #EFEFFF;
+$middleGrayColor: #EAEAFF;
+$redColor: #D80008;
+
+* {
+    padding: 0px;
+    margin: 0px;
+    // overflow-x: hidden;
+}
+
+.head_title {
+    color: $redColor ;
+}
+
+.searchInputContainer {
+    position: relative;
+}
+
+.searchInput {
+    background-color: transparent !important;
+    border-radius: 15px !important;
+    padding: 10px !important;
+    padding-left: 30px !important;
+    border: 1px solid $lightGray;
+
+}
+
+.searchInput::placeholder {
+    color: $blackColor;
+}
+
+.searchInput:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+
+.searchInputContainer i {
+    position: absolute;
+    top: 30%;
+    left: 2%;
+    color: $blackColor;
+}
+
+.search_dropdownMenuButton {
+    border: 1px solid $lightGray;
+    border-radius: 15px;
+    padding: 10px 5px;
+    background-color: $whiteColor;
+
+
+}
+
+.search_dropdownMenuButton_click {
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+    border-bottom: 0px;
+}
+
+.search_dropdownMenuButton:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+.search_dropdown {
+    position: relative;
+}
+
+
+
+.dropdown-menu-list {
+    position: absolute;
+    width: 100% !important;
+    z-index: 11111;
+    padding: 5px;
+    border: 1px solid $lightGray;
+    border-bottom-left-radius: 15px !important;
+    border-bottom-right-radius: 15px !important;
+    background-color: $middleGrayColor;
+    display: none;
+}
+
+.dropdown-menu-list span {
+    cursor: pointer;
+}
+
+// Order table
+
+.contentTable {
+    border-radius: 15px !important;
+}
+
+.contentTable thead th {
+    background-color: $blackColor !important;
+    color: $whiteColor;
+}
+
+
+table {
+    border-radius: 6px 6px 6px 6px;
+    -moz-border-radius: 6px 6px 6px 6px;
+    -webkit-border-radius: 6px 6px 6px 6px;
+    box-shadow: 5px 5px 5px 2px $lighterGrayColor;
+    border: 0px solid transparent;
+}
+
+table td {
+    vertical-align: middle;
+}
+
+table tr {
+    border-bottom: 1px solid $lightGray;
+}
+
+table tr:last-child {
+    border-bottom: 0px solid $lightGray !important;
+}
+
+table th:first-child {
+    border-top-left-radius: 6px;
+}
+
+table th:last-child {
+    border-top-right-radius: 6px;
+}
+
+
+
+table td:first-child {
+    border-bottom-right-radius: 6px;
+}
+
+table td:last-child {
+    border-bottom-right-radius: 6px;
+}
+
+.optionsActions span {
+    cursor: pointer;
+}
+
+// pagination part
+.paginateSection {
+    float: right;
+    width: auto;
+    text-align: center;
+}
+
+.paginateSection ul {
+    background-color: $lighterGrayColor;
+    border-radius: 15px;
+    padding: 5px;
+}
+
+.paginateSection ul li {
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+    margin-left: 2px;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+
+
+}
+
+.paginateSection ul li span {
+    width: 25px;
+    height: 25px;
+
+
+}
+
+.ActivePage {
+    background-color: $redColor;
+    color: $whiteColor;
+    border-radius: 50%;
+}
+
+
+.OrderDetailsSec {
+    width: 100%;
+    border: 1px solid $lightGray;
+    border-radius: 15px;
+    box-shadow: 5px 5px 20px 2px $lighterGrayColor;
+
+}
+.orderDetailsImage{
+    border: 1px solid $lightGray;
+    border-radius: 15px;
+}
+.OrderDetailsInfo{
+    color: $redColor;
+}
+.OrderDetailsSec{
+    display: none;
+}
+.fa-times{
+    cursor: pointer;
+}
+
+

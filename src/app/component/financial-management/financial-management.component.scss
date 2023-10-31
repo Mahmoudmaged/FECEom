@@ -1,0 +1,36 @@
+@import '../user-managment/user-managment.component.scss';
+th{
+    font-size: 13px;
+}
+
+.detailedReport{
+    background-color: $lighterGrayColor;
+    padding: 5px 10px;
+    border-radius: 15px;
+    cursor: pointer;
+}
+
+.cla{
+    overflow: visible;
+}
+
+.applyBttonClick{
+    width: 100%;
+    background-color: $lighterGrayColor;
+    text-align: right;
+}
+.ApplyDate{
+    border-radius: 15px ;
+    padding: 5px 15px;
+    color: $whiteColor;
+
+}
+
+// ng-trigger ng-trigger-overlayAnimation ng-tns-c3918063748-0 p-datepicker p-component p-datepicker-multiple-month ng-star-inserted"
+ng-deep .ng-trigger 
+{
+    z-index: 1002;
+    transform-origin: center bottom;
+    top: 52px !important;
+    left: -608.609px !important;
+}

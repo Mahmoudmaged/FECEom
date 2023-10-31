@@ -1,0 +1,151 @@
+$whiteColor: #ffffff;
+$blackColor: #000000;
+$lightGreen: #81ffca;
+$lightPink: #FFDCDC;
+$middlePink: #FFEDC3;
+$lightGray: #d1d1d1;
+$lighterGrayColor: #EFEFFF; //grayColor
+$middleGrayColor: #EAEAFF;
+$redColor: #D80008;
+
+* {
+    padding: 0px;
+    margin: 0px;
+    overflow-x: hidden;
+}
+
+.dashBoard {
+    height: 100%;
+    overflow: hidden;
+}
+
+.dashBoard ::-webkit-scrollbar {
+    display: none;
+}
+
+// Start SideNav
+.sideNav {
+    position: relative;
+    border: 0px transparent;
+    border-radius: 25px;
+    box-shadow: 5px 5px 20px 2px $lighterGrayColor;
+    background-color: $whiteColor;
+
+}
+
+.imageContainer img {
+    width: 80%;
+    padding: 5px;
+
+}
+
+.contentList {
+    border-top: 1px solid $middleGrayColor;
+    ;
+    border-bottom: 1px solid $middleGrayColor;
+}
+
+
+.contentList ul li {
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.listItem .fa-circle {
+    font-size: 8px;
+    display: none;
+}
+
+.listItem1 .fa-circle {
+    display: inline-block;
+}
+
+
+.ActiveCheck {
+    background-color: $blackColor;
+    font-size: 14px;
+    border-radius: 15px;
+    color: $whiteColor;
+}
+
+.sideNav_footer {
+    // border-top: 1px solid $$middleGrayColor;
+    // position: absolute;
+    // vertical-align: middle;
+    // bottom: 1%;
+    // left: 0%;
+    // right: 0%;
+    padding: 15px 5px;
+    text-align: center;
+    color: $redColor ;
+
+}
+
+// End
+
+// Start RightPart Head Section
+.profileAndLang {
+
+    background-color: $lightGray;
+    border-radius: 15px;
+    position: relative;
+}
+
+.container_profile_Image {
+    position: relative;
+}
+
+.container_profile_Image .fa-circle {
+    position: absolute;
+    left: 0%;
+    bottom: 2%;
+    z-index: 111;
+}
+
+.profileImage {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+.profileAndLang .fa-circle {
+    color: green;
+    position: absolute;
+}
+
+.changeLang {
+    border-left: 2px solid $lighterGrayColor;
+
+}
+
+.changeLang div {
+    background-color: $whiteColor;
+    border: 1px solid $lightGray;
+    border-radius: 10px;
+}
+
+.commentNotify {
+    position: relative;
+}
+
+.commentNotify .fa-circle {
+    position: absolute;
+    right: 1%;
+    top: 0%;
+}
+
+.commentNotify2 .fa-circle {
+    position: absolute;
+    left: 15%;
+    top: 1%;
+    color: $redColor;
+}
+
+
+// Nested component
+.componentSection {
+    display: none;
+}
+.order{
+    display: block;
+}

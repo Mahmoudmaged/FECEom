@@ -1,0 +1,265 @@
+<div class="head">
+    <div class="row">
+        <div class="col-lg-3  col-md-5 col-12">
+            <h4 class="head_title">Vendor Management</h4>
+            <p class="my-1  head_Desc">View list of registered vendors on the platform...</p>
+        </div>
+        <div class="col-lg-9 col-md-7 col-12 VendorTable">
+            <div class="row ">
+                <div class="col-md-10 col-8">
+                    <div class="row align-items-center ">
+                        <div class="col-md-4">
+                            <div class="searchInputContainer">
+                                <input type="text" placeholder="Search results " class="w-100 searchInput">
+                                <i class="fa fa-search"></i>
+                            </div>
+                        </div>
+                        <div class="col-md-8 px-2">
+                            <input class="styled-checkbox" type="radio" name="filterVendor" value="View All vendor"
+                                checked>
+                            <label>View All vendor</label>
+                            <input class="styled-checkbox" type="radio" name="filterVendor" value="Continue vendor">
+                            <label>Continue vendor</label>
+                            <input class="styled-checkbox" type="radio" name="filterVendor" value="Suspend vendor">
+                            <label>Suspend vendor</label>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-md-2 col-4">
+                    <div class="ms-1">
+                        <div class="search_dropdown">
+                            <button (click)="showDropDown('search_dropdownMenuButton1', 'dropdown-menu-list1')"
+                                class="btn dropdown-toggle w-100 search_dropdownMenuButton  search_dropdown_btn search_dropdownMenuButton1"
+                                type="button" id="dropdownMenuButton" aria-haspopup="true" aria-expanded="false">
+                                Vendor Status
+                            </button>
+                            <div class="dropdown-menu-list  dropdown-menu-list1">
+                                <span class="dropdown-item"
+                                    (click)="changeOrderStatus('search_dropdownMenuButton1','Vendor Status')">All</span>
+                                <span class="dropdown-item"
+                                    (click)="changeOrderStatus('search_dropdownMenuButton1','continue')">Continue</span>
+                                <span class="dropdown-item"
+                                    (click)="changeOrderStatus('search_dropdownMenuButton1','suspended')">Suspended</span>
+                                <span class="dropdown-item"
+                                    (click)="changeOrderStatus('search_dropdownMenuButton1','declined')">Declined</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Order Table  -->
+    <section class="VendorTable">
+        <div class="my-2">
+            <table class=" table contentTable bordered">
+                <thead>
+                    <tr>
+                        <th scope="col" style="width: 5%;">Image</th>
+                        <th scope="col" style="width: 15%;">Vendor name</th>
+                        <th scope="col" style="width: 15%;">Mail</th>
+                        <th scope="col" style="width: 14%;">Phone number</th>
+                        <th scope="col" style="width: 15%;">Store name</th>
+                        <th scope="col" style="width: 13%;">Vendor action</th>
+                        <th scope="col" style="width: 13%;">Vendor</th>
+                        <th scope="col" style="width: 10%;">Options</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <img class="img-fluid"
+                                src="../../../assets/images/Sislimoda/SislimodaAdmin/items/images.png" alt="" srcset="">
+                        </td>
+                        <td>Mahmoud Elwan</td>
+                        <td>mahmoudelwan460@gmail.com</td>
+                        <td>+20 01142951602</td>
+                        <td>Matager ELKatab</td>
+
+                        <td>
+                            <div class="search_dropdown">
+                                <button (click)="showDropDown('search_dropdownMenuButton2', 'dropdown-menu-list2')"
+                                    class="btn dropdown-toggle w-100 search_dropdownMenuButton  search_dropdown_btn search_dropdownMenuButton2"
+                                    type="button" id="dropdownMenuButton" aria-haspopup="true" aria-expanded="false">
+                                    Vendor Action
+                                </button>
+                                <div class="dropdown-menu-list  dropdown-menu-list2">
+                                    <span class="dropdown-item"
+                                        (click)="changeOrderStatus('search_dropdownMenuButton2','continue')">Continue</span>
+                                    <span class="dropdown-item"
+                                        (click)="changeOrderStatus('search_dropdownMenuButton2','suspended')">Suspended</span>
+                                    <span class="dropdown-item"
+                                        (click)="changeOrderStatus('search_dropdownMenuButton2','declined')">Declined</span>
+                                </div>
+                            </div>
+                        </td>
+
+                        <td>
+                            <div class="search_dropdown">
+                                <button (click)="showDropDown('search_dropdownMenuButton25', 'dropdown-menu-list25')"
+                                    class="btn dropdown-toggle w-100 search_dropdownMenuButton  search_dropdown_btn search_dropdownMenuButton25"
+                                    type="button" id="dropdownMenuButton" aria-haspopup="true" aria-expanded="false">
+                                    vendor
+                                </button>
+                                <div class="dropdown-menu-list  dropdown-menu-list25">
+                                    <span class="dropdown-item"
+                                        (click)="changeOrderStatus('search_dropdownMenuButton25','continue')">Continue</span>
+                                    <span class="dropdown-item"
+                                        (click)="changeOrderStatus('search_dropdownMenuButton25','suspended')">Suspended</span>
+                                    <span class="dropdown-item"
+                                        (click)="changeOrderStatus('search_dropdownMenuButton25','declined')">Declined</span>
+                                </div>
+                            </div>
+                        </td>
+
+                        <td class="optionsActions">
+                            <span class="p-1"> <i class="fa fa-edit"></i></span>
+                            <span class="p-1"> <i class="fa fa-trash"></i></span>
+                            <span class="p-1" (click)="displayVendorProf()"> <i class="fa fa-ellipsis-v" aria-hidden="true"></i></span>
+
+                        </td>
+
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="paginateSection my-2">
+            <ul class="ul">
+                <li class="" (click)="previousPage()"><i class="fa fa-angle-left"></i></li>
+
+                <li *ngFor="let item of [].constructor(pages); index as i">
+                    <!-- <p *ngIf="pages > 10 && i+2 < pages" class="ActivePage">...</p> -->
+                    <p *ngIf="i+1 == currentPage ; else notCurrent " class="page page{{i+1}} ActivePage"
+                        (click)="getPageContent(i+1)">
+                        {{i+1}}
+                    </p>
+                    <ng-template #notCurrent>
+                        <p class="page page{{i+1}}" (click)="getPageContent(i+1)">
+                            {{i+1}}
+                        </p>
+                    </ng-template>
+                </li>
+
+                <li class="" (click)="nextPage()"><i class="fa fa-angle-right"></i></li>
+
+            </ul>
+        </div>
+    </section>
+
+    <section class="VendorProfSec  p-3">
+        <div class="text-end w-100">
+            <i (click)="closeVendorProf()" class="fa fa-times  ms-auto" aria-hidden="true"></i>
+        </div>
+        <div class="info my-1">
+            <img src="../../../assets/images/Sislimoda/SislimodaAdmin/items/istockphoto-1200677760-612x612.png" alt="">
+            <div class="title">
+                <h5>Vendor Name</h5>
+                <p>Mahmoud Elwan</p>
+            </div>
+        </div>
+        <hr>
+        <div class="my-1 venderDetails px-2 py-3">
+            <div class="row justify-content-center align-items-center">
+                <div class="col-lg-4 col-6 my-1">
+                    <div class="p-2">
+                        <p>Email Address</p>
+                        <p> <i class="fa fa-map-marker " aria-hidden="true"></i> mahmoudelwan460@gmail.com</p>
+                    </div>
+
+                </div>
+
+                <div class="col-lg-3 col-6 my-1">
+                    <div class="p-2">
+                        <p>Phone Number</p>
+                        <p> +20 01142951602</p>
+                    </div>
+
+                </div>
+
+
+                <div class="col-lg-3 col-6 my-1">
+                    <div class="p-2">
+                        <p>Store Name</p>
+                        <p>Amazon Store</p>
+                    </div>
+                </div>
+
+
+                <div class="col-lg-2 col-6 my-1">
+                    <div class="p-2">
+                        <p class="">Vendor action</p>
+                        <div class="search_dropdown vendorProfileAc">
+                            <button (click)="showDropDown('search_dropdownMenuButton22', 'dropdown-menu-list22')"
+                                class="btn dropdown-toggle w-100 search_dropdownMenuButton  search_dropdown_btn search_dropdownMenuButton22"
+                                type="button" id="dropdownMenuButton" aria-haspopup="true" aria-expanded="false">
+                                continue
+                            </button>
+                            <div class="dropdown-menu-list  dropdown-menu-list22">
+                                <span class="dropdown-item"
+                                    (click)="changeVendorStatus('search_dropdownMenuButton22','continue')">Continue</span>
+                                <span class="dropdown-item"
+                                    (click)="changeVendorStatus('search_dropdownMenuButton22','suspended')">Suspended</span>
+                                <span class="dropdown-item"
+                                    (click)="changeVendorStatus('search_dropdownMenuButton22','declined')">Declined</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <hr>
+
+        <div class="my-1 venderStatics px-2 py-3">
+            <div class="row align-items-center">
+                <div class="col-12 my-1">
+                    <div class="p-2">
+                        <p>Vendor statistics</p>
+                    </div>
+
+                </div>
+                <div class="col-lg-8">
+                    <div class="p-2 METRICS d-flex align-items-center">
+                        <p>SALES METRICS</p>
+                        <div class="search_dropdown w-25">
+                            <button (click)="showDropDown('search_dropdownMenuButton21', 'dropdown-menu-list21')"
+                                class="btn dropdown-toggle w-100 search_dropdownMenuButton  search_dropdown_btn search_dropdownMenuButton21"
+                                type="button" id="dropdownMenuButton" aria-haspopup="true" aria-expanded="false">
+                                Year
+                            </button>
+                            <div class="dropdown-menu-list  dropdown-menu-list21">
+                                <span class="dropdown-item"
+                                    (click)="changeOrderStatusGraph('search_dropdownMenuButton21','year')">year</span>
+                                <span class="dropdown-item"
+                                    (click)="changeOrderStatusGraph('search_dropdownMenuButton21','month')">month</span>
+                                <span class="dropdown-item"
+                                    (click)="changeOrderStatusGraph('search_dropdownMenuButton21','day')">day</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="diplayChart w-100 p-2">
+                        <canvas id="myChart">
+                        </canvas>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="p-3">
+                        <div class=" my-1">
+                            <p>Products overview</p>
+                        </div>
+                        <div class="diplayChart w-100 p-2">
+                            <canvas id="myChart2">
+                            </canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="w-100 text-end">
+            <button class="btn btn-dark px-3 py-2">Save</button>
+        </div>
+
+    </section>
+</div>

@@ -1,0 +1,192 @@
+<div class="dashBoard p-2">
+    <div class="row p-2 h-100">
+
+        <div class="col-3 col-md-3 col-lg-2 sideNav">
+
+            <div class="imageContainer text-center">
+                <img class="" src="../../../assets/images/Sislimoda/logo.png" alt="" srcset="">
+            </div>
+            <!-- contentList -->
+            <div class="contentList p-2">
+                <ul class="text">
+                    <li class="my-2 py-4   listItem listItem1" (click)="changeDisplay('listItem1' , 'dashboard')">
+                        <i class="fa fa-circle"></i>
+                        <span class="ActiveCheck ms-1 py-3 px-2">
+                            <!-- <i class="fa fa-user mx-1"></i> -->
+                            <img src="../../../assets/images/Sislimoda/Group1.png" alt="" srcset="">
+                            Dashboard Overview
+                        </span>
+                    </li>
+
+                    <li class="my-2 py-4  listItem listItem2" (click)="changeDisplay('listItem2' , 'order')">
+                        <i class="fa fa-circle"></i>
+                        <span class="ms-1 py-3 px-2">
+                            <i class="fa fa-user mx-1"></i>
+                            Order Management
+                        </span>
+                    </li>
+
+
+
+                    <li class="my-2 py-4  listItem listItem3" (click)="changeDisplay('listItem3', 'product')">
+                        <i class="fa fa-circle"></i>
+                        <span class="ms-1 py-3 px-2">
+                            <i class="fa fa-user mx-1"></i>
+                            Product Management
+                        </span>
+                    </li>
+
+
+                    <li class="my-2 py-4  listItem listItem4" (click)="changeDisplay('listItem4' , 'vendor')">
+                        <i class="fa fa-circle"></i>
+                        <span class="ms-1 py-3 px-2">
+                            <i class="fa fa-user mx-1"></i>
+                            Vendor Management
+                        </span>
+                    </li>
+
+
+                    <li class="my-2 py-4  listItem listItem5" (click)="changeDisplay('listItem5' , 'inventory')">
+                        <i class="fa fa-circle"></i>
+                        <span class="ms-1 py-3 px-2">
+                            <i class="fa fa-user mx-1"></i>
+                            Inventory Management
+                        </span>
+                    </li>
+
+
+                    <li class="my-2 py-4  listItem listItem6" (click)="changeDisplay('listItem6' ,'user')">
+                        <i class="fa fa-circle"></i>
+                        <span class="ms-1 py-3 px-2">
+                            <i class="fa fa-users mx-1"></i>
+                            Users Management
+                        </span>
+                    </li>
+
+                    <li class="my-2 py-4  listItem listItem7" (click)="changeDisplay('listItem7'  ,'financial')">
+                        <i class="fa fa-circle"></i>
+                        <span class="ms-1 py-3 px-2">
+                            <i class="fa fa-users mx-1"></i>
+                            Financial Management
+                        </span>
+                    </li>
+
+
+                    <li class="my-2 py-4  listItem listItem8" (click)="changeDisplay('listItem8' , '')">
+                        <i class="fa fa-circle"></i>
+                        <span class="ms-1 py-3 px-2">
+                            <i class="fa fa-users mx-1"></i>
+                            Content Management
+                        </span>
+                    </li>
+
+                    <li class="my-2 py-4  listItem listItem9" (click)="changeDisplay('listItem9' , '')">
+                        <i class="fa fa-circle"></i>
+                        <span class="ms-1 py-3 px-2">
+                            <i class="fa fa-users mx-1"></i>
+                            Category Management
+                        </span>
+                    </li>
+
+                    <li class="my-2 py-4  listItem listItem10" (click)="changeDisplay('listItem10' , 'sales')">
+                        <i class="fa fa-circle"></i>
+                        <span class="ms-1 py-3 px-2">
+                            <i class="fa fa-users mx-1"></i>
+                            Sales Management
+                        </span>
+                    </li>
+
+                    <li class="my-2 py-4  listItem listItem11" (click)="changeDisplay('listItem11', '')">
+                        <i class="fa fa-circle"></i>
+                        <span class="ms-1 py-3 px-2">
+                            <i class="fa fa-cog mx-1"></i>
+                            Settings
+                        </span>
+                    </li>
+
+                </ul>
+            </div>
+
+            <!-- footer -->
+            <div class="sideNav_footer">
+                <i class="fa fa-headphones mx-1" aria-hidden="true"></i>
+                <span>Support and Help</span>
+            </div>
+        </div>
+
+        <div class="col-9  col-md-9 col-lg-10 px-2">
+            <div class="w-100">
+                <div class="w-100 p-3 profileAndLang">
+                    <div class="row align-items-center">
+                        <div class="col-4 col-md-8">
+                            <div class="row">
+                                <div class="col-12 col-md-2  col-lg-1">
+                                    <div class="container_profile_Image">
+                                        <img class="profileImage"
+                                            src="../../../assets/images/Sislimoda/SislimodaAdmin/items/istockphoto-1200677760-612x612.png"
+                                            alt="">
+                                        <i class="fa fa-circle"></i>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-10 col-lg-11">
+                                    <div class="p-2">
+                                        <h5>Mahmoud Elwan</h5>
+                                        <p>mahmoudelwan460@gmail.com</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-8  col-md-4">
+                            <div class="row">
+                                <div class="col-6 notifyPart text-light text-end">
+                                    <div class="row pe-1">
+                                        <div class="col-lg-10 col-7 text-end commentNotify">
+                                            <i class=" fa fa-comment me-2 fa-2x"></i>
+                                            <i class="fa fa-circle"></i>
+                                        </div>
+                                        <div class="col-lg-2  col-5 commentNotify  commentNotify2 text-start">
+                                            <i class="fa fa-circle  ms-1"></i>
+                                            <i class=" fa fa-bell fa-2x"></i>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                                <div class="col-6  px-2 changeLang ">
+                                    <div class="d-flex align-items-center justify-content-center h-100 w-100  p-1">
+                                        <i class="fa fa-globe me-2"></i>
+                                        <span class="text-center">English</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="w-100  my-1 px-1  py-3 componentSection  order">
+                <app-order-management></app-order-management>
+            </div>
+
+            <div class="w-100  my-1 px-1  py-3  componentSection  vendor">
+                <app-vendor-management></app-vendor-management>
+            </div>
+
+
+            <div class="w-100  my-1 px-1  py-3  componentSection  user">
+                <app-user-managment></app-user-managment>
+            </div>
+
+            <div class="w-100  my-1 px-1  py-3  componentSection  sales">
+               <app-sales-management></app-sales-management>
+            </div>
+
+            <div class="w-100  my-1 px-2  py-3  componentSection  financial h-100">
+                <app-financial-management></app-financial-management>
+             </div>
+
+
+        </div>
+
+    </div>
+</div>
