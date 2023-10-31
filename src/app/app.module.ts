@@ -16,6 +16,7 @@ import { SettingsManagementComponent } from './component/settings-management/set
 import { CalendarModule } from 'primeng/calendar';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations'
 import {NgApexchartsModule} from 'ng-apexcharts';
+import { AdminLoginComponent } from './component/admin-login/admin-login.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,7 +26,8 @@ import {NgApexchartsModule} from 'ng-apexcharts';
     UserManagmentComponent,
     SalesManagementComponent,
     FinancialManagementComponent,
-    SettingsManagementComponent
+    SettingsManagementComponent,
+    AdminLoginComponent
   ],
   imports: [
     BrowserModule,

@@ -3,7 +3,7 @@ declare let $: any;
 
 
 
-import {ChartComponent} from "ng-apexcharts";
+import { ChartComponent } from "ng-apexcharts";
 import {
   ApexAxisChartSeries,
   ApexChart,
@@ -31,7 +31,7 @@ export type ChartOptions = {
 export class FinancialManagementComponent implements OnInit {
 
   public chartOptions: Partial<ChartOptions>;
- 
+
   constructor() {
     this.chartOptions = {
       series: [
@@ -51,6 +51,7 @@ export class FinancialManagementComponent implements OnInit {
         categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep"]
       }
     };
+    console.log(this.chartOptions)
   }
 
 
@@ -63,8 +64,8 @@ export class FinancialManagementComponent implements OnInit {
 
 
   ngOnInit(): void {
-
   }
+
 
 
   showDropDown(classSelector: string, dropdownSelector: string) {

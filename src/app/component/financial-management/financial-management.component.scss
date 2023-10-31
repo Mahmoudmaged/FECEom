@@ -26,11 +26,14 @@ th{
 
 }
 
-// ng-trigger ng-trigger-overlayAnimation ng-tns-c3918063748-0 p-datepicker p-component p-datepicker-multiple-month ng-star-inserted"
-ng-deep .ng-trigger 
-{
-    z-index: 1002;
-    transform-origin: center bottom;
-    top: 52px !important;
-    left: -608.609px !important;
+
+::ng-deep {
+    .p-datepicker td>span {
+            width: 25px !important;
+            height: 25px !important;
+        }
+}
+
+::ng-deep .p-calendar .p-datepicker {
+    left: -1000px !important;
 }

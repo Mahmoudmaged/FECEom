@@ -1,0 +1,91 @@
+$whiteColor: #ffffff;
+$blackColor: #000000;
+$lightGreen: #81ffca;
+$lightPink: #FFDCDC;
+$middlePink: #FFEDC3;
+$lightGray: #d1d1d1;
+$lighterGrayColor: #EFEFFF; //grayColor
+$middleGrayColor: #EAEAFF;
+$redColor: #D80008;
+
+* {
+    padding: 0px;
+    margin: 0px;
+    overflow: hidden;
+}
+
+.loginPage {
+    width: 100vw;
+    height: 100vh;
+    background-image: url('../../../assets/images/Sislimoda/SislimodaAdmin/items/full-shot-woman-online-fashion-shopping.png');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    // background-position-x: center;
+    // background-position-y: center;
+}
+
+.Form {
+    background-color: $whiteColor ;
+    border: 1px solid $lightGray;
+    // box-shadow: 3px 3px 20px 2px $lighterGrayColor;
+    border-radius: 15px;
+
+}
+
+.logoImage {
+    width: 150px;
+    margin: auto;
+}
+
+.welcomeSec {
+    color: $lightGray;
+}
+
+.form-control {
+    padding: 5px 10px;
+    outline: none;
+    box-shadow: none;
+}
+
+.form-control:focus {
+    outline: none;
+    box-shadow: none;
+    border-color: #d1d1d1;
+}
+
+.btn-dark {
+    border-radius: 5px;
+    background-color: $blackColor !important;
+
+}
+
+
+.checkBoxInput:checked {
+    accent-color: $redColor;
+}
+
+.forgetLink {
+    color: $redColor;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.passwordContainer {
+    position: relative;
+}
+
+.fa-eye {
+    display: none;
+}
+
+.passwordContainer i {
+    position: absolute;
+    right: 2%;
+    top: 30%;
+    cursor: pointer;
+}
+
+.forgetCode,
+.resetScreen {
+    display: none;
+}

@@ -90,10 +90,12 @@
     </section>
 
 
-  
 
-    <!-- <div>
-        <apx-chart [series]="chartOptions[series]" [chart]="chartOptions[chart]" ></apx-chart>
-    </div> -->
+    <div>
+        {{chartOptions.series!}}
+    </div>
+    <div class="">
+        <apx-chart [series]="chartOptions.series!" [chart]="chartOptions.chart!"></apx-chart>
+    </div>
 
 </div>

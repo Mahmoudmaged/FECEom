@@ -7,6 +7,7 @@ declare let $: any
 })
 export class AdministrationComponent implements OnInit {
 
+  fin:string = 'app-financial-management'
   constructor() { }
 
   ngOnInit(): void {
