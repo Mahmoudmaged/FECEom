@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class AuthService {
-  baseURL = `http://localhost:3000/api/v1/auth/`;
+  baseURL = `https://sislimoda.com/api/auth/`;
   token: any = `Hamada__` + localStorage.getItem("token");
   constructor(private _HttpClient: HttpClient, private _Router: Router) {
     this.token = `Hamada__` + localStorage.getItem("token")
@@ -16,6 +16,10 @@ export class AuthService {
 
   signIn(data: any): Observable<any> {
     console.log({ data });
-    return this._HttpClient.post(this.baseURL + "login", data);
+    return this._HttpClient.post(`${this.baseURL}LoginAdmin?userName=${data.email}&password=${data.password}`, {});
+  }
+
+  isLoggedIn() {
+    return !!localStorage.getItem('token');
   }
 }

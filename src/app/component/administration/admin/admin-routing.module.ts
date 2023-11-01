@@ -7,6 +7,9 @@ import { UserManagementComponent } from '../../user-management/user-management.c
 import { SalesManagementComponent } from '../../sales-management/sales-management.component';
 import { VendorProfileComponent } from '../../vendor-profile/vendor-profile.component';
 import { FinancialManagementReportComponent } from '../../financial-management-report/financial-management-report.component';
+import { SettingsManagementComponent } from '../../settings-management/settings-management.component';
+import { AdministrationComponent } from '../administration.component';
+import { NotAvailableComponent } from '../../not-available/not-available.component';
 
 const routes: Routes = [
   { path: 'financial', component: FinancialManagementComponent },
@@ -15,7 +18,10 @@ const routes: Routes = [
   { path: 'user', component: UserManagementComponent },
   { path: 'vendor', component: VendorManagementComponent },
   { path: 'sales', component: SalesManagementComponent },
-  { path: "vendor/:id/profile", component: VendorProfileComponent }
+  { path: "vendor/:id/profile", component: VendorProfileComponent },
+  { path: "settings", component: SettingsManagementComponent },
+  { path: "**", component:NotAvailableComponent },
+
 ];
 
 @NgModule({

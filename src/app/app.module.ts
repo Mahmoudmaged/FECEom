@@ -19,6 +19,8 @@ import {NgApexchartsModule} from 'ng-apexcharts';
 import { AdminLoginComponent } from './component/admin-login/admin-login.component';
 import { VendorProfileComponent } from './component/vendor-profile/vendor-profile.component';
 import { FinancialManagementReportComponent } from './component/financial-management-report/financial-management-report.component';
+import { NotAvailableComponent } from './component/not-available/not-available.component';
+import { VendorLoginComponent } from './component/vendor-login/vendor-login.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,7 +33,9 @@ import { FinancialManagementReportComponent } from './component/financial-manage
     SettingsManagementComponent,
     AdminLoginComponent,
     VendorProfileComponent,
-    FinancialManagementReportComponent
+    FinancialManagementReportComponent,
+    NotAvailableComponent,
+    VendorLoginComponent
   ],
   imports: [
     BrowserModule,

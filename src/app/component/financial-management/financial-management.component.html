@@ -16,7 +16,8 @@
                 <div class="col-md-1"></div>
                 <div class="col-md-4 my-2">
 
-                    <p-calendar [(ngModel)]="rangeDates" selectionMode="range" [numberOfMonths]="2">
+                    <label for="cal">call</label>
+                    <p-calendar id="cal" [(ngModel)]="rangeDates" selectionMode="range" [numberOfMonths]="2">
                         <!-- <ng-template pTemplate="footer">
                             <button class="btn btn-dark ApplyDate">Apply</button>
                         </ng-template> -->
@@ -57,7 +58,7 @@
                         <td class="optionsActions">
                             <span class="p-1"> <i class="fa fa-edit"></i></span>
                             <span class="p-1"> <i class="fa fa-trash"></i></span>
-                            <span class="p-1" (click)="displayUserInquiries()"> <i class="fa fa-ellipsis-v"
+                            <span class="p-1" (click)="displayFinancialReport('65965')"> <i class="fa fa-ellipsis-v"
                                     aria-hidden="true"></i></span>
 
                         </td>
