@@ -9,7 +9,7 @@
             <!-- contentList -->
             <div class="contentList p-2">
                 <ul class="text">
-                    <li class="my-2 py-4   listItem listItem1" (click)="changeDisplay('listItem1' , 'dashboard')">
+                    <li class="my-2 py-4   listItem listItem1"  (click)="changeDisplay('listItem1' , 'dashboard')">
                         <i class="fa fa-circle"></i>
                         <span class="ActiveCheck ms-1 py-3 px-2">
                             <!-- <i class="fa fa-user mx-1"></i> -->
@@ -164,26 +164,12 @@
                 </div>
             </div>
 
-            <div class="w-100  my-1 px-1  py-3 componentSection  order">
-                <app-order-management></app-order-management>
+            <div class="w-100  my-1 px-1  py-3">
+                <router-outlet></router-outlet>
+
             </div>
 
-            <div class="w-100  my-1 px-1  py-3  componentSection  vendor">
-                <app-vendor-management></app-vendor-management>
-            </div>
-
-
-            <div class="w-100  my-1 px-1  py-3  componentSection  user">
-                <app-user-managment></app-user-managment>
-            </div>
-
-            <div class="w-100  my-1 px-1  py-3  componentSection  sales">
-               <app-sales-management></app-sales-management>
-            </div>
-
-            <div class="w-100  my-1 px-2  py-3  componentSection  financial h-100">
-                <app-financial-management></app-financial-management>
-             </div>
+           
 
 
         </div>

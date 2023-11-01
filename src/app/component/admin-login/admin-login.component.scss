@@ -25,9 +25,10 @@ $redColor: #D80008;
 }
 
 .Form {
-    background-color: $whiteColor ;
+    //background-color:rgba($color: #000000, $alpha: .3) ;
+    // color: $whiteColor;
+    background-color:$whiteColor; 
     border: 1px solid $lightGray;
-    // box-shadow: 3px 3px 20px 2px $lighterGrayColor;
     border-radius: 15px;
 
 }

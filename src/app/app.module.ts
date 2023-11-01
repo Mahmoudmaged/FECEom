@@ -9,7 +9,7 @@ import { AdministrationComponent } from './component/administration/administrati
 import { OrderManagementComponent } from './component/order-management/order-management.component';
 import { VendorManagementComponent } from './component/vendor-management/vendor-management.component';
 import { from } from 'rxjs';
-import { UserManagmentComponent } from './component/user-managment/user-managment.component';
+import { UserManagementComponent } from './component/user-management/user-management.component';
 import { SalesManagementComponent } from './component/sales-management/sales-management.component';
 import { FinancialManagementComponent } from './component/financial-management/financial-management.component';
 import { SettingsManagementComponent } from './component/settings-management/settings-management.component';
@@ -17,17 +17,21 @@ import { CalendarModule } from 'primeng/calendar';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations'
 import {NgApexchartsModule} from 'ng-apexcharts';
 import { AdminLoginComponent } from './component/admin-login/admin-login.component';
+import { VendorProfileComponent } from './component/vendor-profile/vendor-profile.component';
+import { FinancialManagementReportComponent } from './component/financial-management-report/financial-management-report.component';
 @NgModule({
   declarations: [
     AppComponent,
     AdministrationComponent,
     OrderManagementComponent,
     VendorManagementComponent,
-    UserManagmentComponent,
+    UserManagementComponent,
     SalesManagementComponent,
     FinancialManagementComponent,
     SettingsManagementComponent,
-    AdminLoginComponent
+    AdminLoginComponent,
+    VendorProfileComponent,
+    FinancialManagementReportComponent
   ],
   imports: [
     BrowserModule,

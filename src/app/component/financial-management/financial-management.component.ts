@@ -1,25 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 declare let $: any;
 
 
 
 import { ChartComponent } from "ng-apexcharts";
-import {
-  ApexAxisChartSeries,
-  ApexChart,
-  ApexXAxis,
-  ApexTitleSubtitle
-} from "ng-apexcharts";
-
-
-export type ChartOptions = {
-  series: ApexAxisChartSeries;
-  chart: ApexChart;
-  title: ApexTitleSubtitle;
-  xaxis: ApexXAxis;
-
-};
-
 
 @Component({
   selector: 'app-financial-management',
@@ -30,28 +15,8 @@ export type ChartOptions = {
 
 export class FinancialManagementComponent implements OnInit {
 
-  public chartOptions: Partial<ChartOptions>;
 
-  constructor() {
-    this.chartOptions = {
-      series: [
-        {
-          name: "My-series",
-          data: [10, 41, 35, 51, 49, 62, 69, 91, 148]
-        }
-      ],
-      chart: {
-        height: 350,
-        type: "bar"
-      },
-      title: {
-        text: "My First Angular Chart"
-      },
-      xaxis: {
-        categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep"]
-      }
-    };
-    console.log(this.chartOptions)
+  constructor(private _Router: Router) {
   }
 
 
@@ -149,8 +114,11 @@ export class FinancialManagementComponent implements OnInit {
 
   }
 
-  closeVendorProf() {
-    $(".VendorProfSec").css({ "visibility": "hidden" })
-    $(".VendorTable").show(300)
+
+  displayFinancialReport(id: string) {
+
+    this._Router.navigateByUrl(`/admin/financial/${id}/report`)
+
   }
+
 }

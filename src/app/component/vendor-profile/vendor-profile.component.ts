@@ -1,15 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Chart, registerables, Colors } from 'chart.js'
-// import  {ApexChart} from 'ngx-apexcharts'
-
 declare let $: any;
+// import  {ApexChart} from 'ngx-apexcharts'
 @Component({
-  selector: 'app-vendor-management',
-  templateUrl: './vendor-management.component.html',
-  styleUrls: ['./vendor-management.component.scss']
+  selector: 'app-vendor-profile',
+  templateUrl: './vendor-profile.component.html',
+  styleUrls: ['./vendor-profile.component.scss']
 })
-export class VendorManagementComponent implements OnInit {
+export class VendorProfileComponent implements OnInit {
   orderList: any = []
   pages: number = 10;
   pageSize = 8
@@ -45,14 +44,13 @@ export class VendorManagementComponent implements OnInit {
   };
   myFirstChart: any;
   pieChart: any;
-  constructor(private  _Router:Router) {
+  constructor(private _Router:Router) {
 
     Chart.register(...registerables)
     Chart.register(Colors)
   }
 
   ngOnInit(): void {
-
 
     if (this.chartOneData.length > 0) {
       this.myFirstChart = new Chart("myChart",
@@ -153,31 +151,6 @@ export class VendorManagementComponent implements OnInit {
   }
 
 
-  getPageContent(page: number) {
-    if (page <= 0) {
-      page = 1
-    }
-    if (page >= this.pages) {
-      page = this.pages
-    }
-
-    if (this.currentPage == page) {
-      return;
-    }
-
-    console.log({ page });
-    $(`.page`).removeClass('ActivePage')
-    $(`.page${page}`).addClass('ActivePage')
-    this.currentPage = page
-
-  }
-
-  previousPage() {
-    this.getPageContent(this.currentPage - 1)
-  }
-  nextPage() {
-    this.getPageContent(this.currentPage + 1)
-  }
 
 
   changeOrderStatusGraph(btn: string, status: string) {
@@ -265,37 +238,9 @@ export class VendorManagementComponent implements OnInit {
   }
 
 
-  displayVendorProf(id: string) {
-    // $(".VendorTable").hide(200)
-    // $(".VendorProfSec").css({ "visibility": "visible" })
-    // this.displayLineChart('year')
-    // if (this.pieChart) {
-    //   this.pieChart.destroy()
-    //   this.pieChart = new Chart("myChart2",
-    //     {
-    //       type: 'doughnut',
-    //       data: this.pieData,
 
-    //     },
-    //   );
-    // } else {
-    //   this.pieChart = new Chart("myChart2",
-    //     {
-    //       type: 'doughnut',
-    //       data: this.pieData,
-
-    //     },
-    //   );
-    // }
-
-    this._Router.navigateByUrl(`/admin/vendor/${id}/profile`)
-
+  closeVendorProf() {
+     this._Router.navigateByUrl("/admin/vendor")
   }
 
-  // closeVendorProf() {
-  //   // $(".VendorProfSec").hide(200)
-  //   $(".VendorProfSec").css({ "visibility": "hidden" })
-
-  //   $(".VendorTable").show(300)
-  // }
 }

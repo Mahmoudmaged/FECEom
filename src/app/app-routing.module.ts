@@ -5,7 +5,11 @@ import { AdminLoginComponent } from './component/admin-login/admin-login.compone
 
 
 const routes: Routes = [
-  { path: "admin", component: AdministrationComponent },
+  {
+    path: "admin",
+    component:AdministrationComponent,
+    loadChildren: () => import('./component/administration/admin/admin.module').then(mod=>mod.AdminModule)
+  },
   { path: "login", component: AdminLoginComponent },
 
   // { path: "admin", canActivate: [AuthGuard], component: AdminComponent },

@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 declare  let $:any;
 @Component({
-  selector: 'app-user-managment',
-  templateUrl: './user-managment.component.html',
-  styleUrls: ['./user-managment.component.scss']
+  selector: 'app-user-management',
+  templateUrl: './user-management.component.html',
+  styleUrls: ['./user-management.component.scss']
 })
-export class UserManagmentComponent implements OnInit {
+export class UserManagementComponent implements OnInit {
   orderList: any = []
   pages: number = 10;
   pageSize = 8
