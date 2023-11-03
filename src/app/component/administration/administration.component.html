@@ -123,15 +123,15 @@
                                 <div class="col-12 col-md-2  col-lg-1">
                                     <div class="container_profile_Image">
                                         <img class="profileImage"
-                                            src="../../../assets/images/Sislimoda/SislimodaAdmin/items/istockphoto-1200677760-612x612.png"
+                                            [src]="photo"
                                             alt="">
                                         <i class="fa fa-circle"></i>
                                     </div>
                                 </div>
                                 <div class="col-12 col-md-10 col-lg-11">
                                     <div class="p-2">
-                                        <h5>Mahmoud Elwan</h5>
-                                        <p>mahmoudelwan460@gmail.com</p>
+                                        <h5>{{userInfo?.firstName |uppercase }} {{userInfo?.lastName |uppercase }}</h5>
+                                        <p>{{userInfo?.email}}</p>
                                     </div>
                                 </div>
                             </div>

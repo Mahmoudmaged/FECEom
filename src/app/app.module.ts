@@ -21,6 +21,11 @@ import { VendorProfileComponent } from './component/vendor-profile/vendor-profil
 import { FinancialManagementReportComponent } from './component/financial-management-report/financial-management-report.component';
 import { NotAvailableComponent } from './component/not-available/not-available.component';
 import { VendorLoginComponent } from './component/vendor-login/vendor-login.component';
+import { OrderDetailsComponent } from './component/order-details/order-details.component';
+import { ProductComponent } from './component/product/product.component';
+import { ProductDetailsComponent } from './component/product-details/product-details.component';
+import { AddProductComponent } from './component/add-product/add-product.component';
+import { EditProductComponent } from './component/edit-product/edit-product.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -35,7 +40,12 @@ import { VendorLoginComponent } from './component/vendor-login/vendor-login.comp
     VendorProfileComponent,
     FinancialManagementReportComponent,
     NotAvailableComponent,
-    VendorLoginComponent
+    VendorLoginComponent,
+    OrderDetailsComponent,
+    ProductComponent,
+    ProductDetailsComponent,
+    AddProductComponent,
+    EditProductComponent
   ],
   imports: [
     BrowserModule,

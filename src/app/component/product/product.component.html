@@ -1,0 +1,163 @@
+<div class="head">
+    <div class="row align-items-center">
+        <div class="col-lg-4  col-md-5 col-12 my-1">
+            <h4 class="head_title">Product Management</h4>
+            <p class="my-1">View Products details....</p>
+        </div>
+        <div class="col-lg-8 col-md-7 col-12">
+            <div class="row align-items-center justify-content-end  px-2">
+
+                <div class="col-md-3 col-12 my-1">
+                    <div class="searchInputContainer">
+                        <input type="text" placeholder="Search results " class="w-100 searchInput">
+                        <i class="fa fa-search"></i>
+                    </div>
+                </div>
+                <div class="col-9 my-1">
+                    <div class="row align-items-center justify-content-end">
+                        <div class="col-md-3 col-6 my-1">
+                            <div class="ms-1">
+                                <div class="search_dropdown">
+                                    <button
+                                        (click)="showDropDownFilter('search_dropdownMenuButton00', 'dropdown-menu-list00')"
+                                        class="btn dropdown-toggle w-100 search_dropdownMenuButton  search_dropdown_btn search_dropdownMenuButton00"
+                                        type="button" id="dropdownMenuButton" aria-haspopup="true"
+                                        aria-expanded="false">
+                                        Category
+                                    </button>
+                                    <div class="dropdown-menu-list  dropdown-menu-list00">
+                                        <span class="dropdown-item"
+                                            (click)="changeCategoryStatusFilter('search_dropdownMenuButton00','Category')">All</span>
+                                        <span *ngFor="let category of categoryList ; index as i" class="dropdown-item"
+                                            (click)="changeCategoryStatusFilter('search_dropdownMenuButton00',category.nameEn)">
+                                            {{category.nameEn}}</span>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-6 my-1">
+                            <div class="ms-1">
+                                <div class="search_dropdown">
+                                    <button
+                                        (click)="showDropDownFilter('search_dropdownMenuButton11', 'dropdown-menu-list11')"
+                                        class="btn dropdown-toggle w-100 search_dropdownMenuButton  search_dropdown_btn search_dropdownMenuButton11"
+                                        type="button" id="dropdownMenuButton" aria-haspopup="true"
+                                        aria-expanded="false">
+                                        Brand
+                                    </button>
+                                    <div class="dropdown-menu-list  dropdown-menu-list11">
+                                        <span class="dropdown-item"
+                                            (click)="changeBrandStatusFilter('search_dropdownMenuButton11','Brand')">All</span>
+                                        <span *ngFor="let band of brandList ; index as i" class="dropdown-item"
+                                            (click)="changeBrandStatusFilter('search_dropdownMenuButton11', band.nameEn)">{{band.nameEn}}</span>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-6 my-1">
+                            <div class="ms-1">
+                                <div class="search_dropdown">
+                                    <button
+                                        (click)="showDropDownFilter('search_dropdownMenuButton22', 'dropdown-menu-list22')"
+                                        class="btn dropdown-toggle w-100 search_dropdownMenuButton  search_dropdown_btn search_dropdownMenuButton22"
+                                        type="button" id="dropdownMenuButton" aria-haspopup="true"
+                                        aria-expanded="false">
+                                        Delivery
+                                    </button>
+                                    <div class="dropdown-menu-list  dropdown-menu-list22">
+                                        <span class="dropdown-item"
+                                            (click)="changeAvailabilityStatusFilter('search_dropdownMenuButton22','Delivery')">All</span>
+                                        <span class="dropdown-item"
+                                            (click)="changeAvailabilityStatusFilter('search_dropdownMenuButton22','Available')">Available</span>
+                                        <span class="dropdown-item"
+                                            (click)="changeAvailabilityStatusFilter('search_dropdownMenuButton22','Unavailable')">Unavailable</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div *ngIf="userInfo.isUser" class="col-md-3 col-6 my-1">
+                            <div class="ms-1">
+                               <button class="btn btn-danger addProductBtn w-100" (click)="addProduct()">Add <i class="fa fa-plus mx-1"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Order Table  -->
+    <div class="my-2">
+        <table class="table contentTable bordered">
+            <thead id="myTableHead">
+                <tr>
+                    <th scope="col" style="width: 10%;">Image</th>
+                    <th scope="col" style="width: 25%;">Product details</th>
+                    <th scope="col" style="width: 15%;">Inventory</th>
+                    <th scope="col" style="width: 15%;">Category</th>
+                    <th scope="col" style="width: 10%;">Brand</th>
+                    <th scope="col" style="width: 15%;">Delivery Available </th>
+                    <th scope="col" style="width: 10%;">options</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let product of productList ; index as i">
+                    <td>
+                        <img class="img-fluid" src="{{product?.defaultPhoto.fullLink}}" alt="" srcset="">
+                    </td>
+                    <td>
+                        <p>{{product?.descriptionEn?.slice(0,50)}}...</p>
+                    </td>
+                    <td>{{product?.inventory?.nameEn || 'Amazon Egypt'}}</td>
+                    <td>{{product?.category?.nameEn}}</td>
+                    <td>{{product?.brand?.nameEn}}</td>
+                    <td>
+                        <div *ngIf="product.isActive ==true" class="available">
+                            <i class="fa fa-circle  mx-1"></i> <span>Available</span>
+                        </div>
+                        <div *ngIf="!product.isActive" class="unavailable">
+                            <i class="fa fa-circle  mx-1"></i> <span>Unavailable</span>
+                        </div>
+                    </td>
+
+                    <td class="optionsActions">
+                        <span *ngIf="userInfo.isUser" class="p-1" (click)="updateProductDetails(product.id)"> <i class="fa fa-edit"></i></span>
+                        <span class="p-1"> <i class="fa fa-trash"></i></span>
+                        <span class="p-1" (click)="displayProductDetails(product.id)"> <i class="fa fa-ellipsis-v"
+                                aria-hidden="true"></i></span>
+
+                    </td>
+
+                </tr>
+
+            </tbody>
+        </table>
+    </div>
+
+    <div *ngIf="pages > 0" class=" paginateSection my-2">
+        <ul class="ul">
+            <li class="" (click)="previousPage()"><i class="fa fa-angle-left"></i></li>
+
+            <li *ngFor="let item of [].constructor(pages); index as i">
+                <!-- <p *ngIf="pages > 10 && i+2 < pages" class="ActivePage">...</p> -->
+                <p *ngIf="i+1 == currentPage ; else notCurrent " class="page page{{i+1}} ActivePage"
+                    (click)="getPageContent(i+1)">
+                    {{i+1}}
+                </p>
+                <ng-template #notCurrent>
+                    <p class="page page{{i+1}}" (click)="getPageContent(i+1)">
+                        {{i+1}}
+                    </p>
+                </ng-template>
+
+                <!-- <p *ngIf="(pages > 10 && i>10) && (i+1 != currentPage) " class="">..... </p>
+                <p *ngIf="(pages > 10 && i> 10) && (i+1 != currentPage) " class="">.....</p> -->
+                <!-- <p *ngIf="!(pages > 10 && i+2 < pages) && (i+1 != currentPage)" class="">{{i+1}}</p> -->
+            </li>
+
+            <li class="" (click)="nextPage()"><i class="fa fa-angle-right"></i></li>
+
+        </ul>
+    </div>
+</div>

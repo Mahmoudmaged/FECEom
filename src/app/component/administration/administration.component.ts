@@ -11,8 +11,14 @@ declare let $: any
 })
 export class AdministrationComponent implements OnInit {
 
-  fin: string = 'app-financial-management'
-  constructor(public _Router: Router) { }
+  photo: string = `../../../assets/images/avatar/ava.png`
+  userInfo: any;
+  constructor(public _Router: Router) {
+
+    this.userInfo = JSON.parse(localStorage.getItem('user')!);
+    this.photo = this.userInfo?.photo || this.photo;
+
+  }
 
   ngOnInit(): void {
   }

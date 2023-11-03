@@ -1,23 +1,26 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { OrderService } from 'src/app/Services/order.service';
 declare let $: any;
 @Component({
-  selector: 'app-order-management',
-  templateUrl: './order-management.component.html',
-  styleUrls: ['./order-management.component.scss']
+  selector: 'app-order-details',
+  templateUrl: './order-details.component.html',
+  styleUrls: ['./order-details.component.scss']
 })
-export class OrderManagementComponent implements OnInit {
-  orderList: any = []
+export class OrderDetailsComponent implements OnInit {
+
+  order: any;
   pages: number = 20;
   pageSize = 8
   currentPage = 1
   photo: string = `../../../assets/images/avatar/ava.png`
   userInfo: any;
-  constructor(private _Router: Router, private _OrderService: OrderService) {
+  constructor(private _Router: Router, private _OrderService: OrderService, public _ActivatedRoute: ActivatedRoute) {
     this.userInfo = JSON.parse(localStorage.getItem('user')!);
+    
     this.photo = this.userInfo?.photo || this.photo;
-    this.getAllOrders(this.userInfo?.id)
+    this.getOrder(this._ActivatedRoute.snapshot.paramMap.get('id')!)
+
   }
 
 
@@ -25,13 +28,12 @@ export class OrderManagementComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  getAllOrders(userId: string) {
-    return this._OrderService.getOrderList(userId).subscribe(res => {
+  getOrder(orderId: any) {
+    return this._OrderService.getOrderById(orderId).subscribe(res => {
       console.log({ res });
-      this.orderList = res
+      this.order = res
     }, err => {
       console.log({ err });
-
     }
     )
   }
@@ -103,31 +105,6 @@ export class OrderManagementComponent implements OnInit {
   }
 
 
-  getPageContent(page: number) {
-    if (page <= 0) {
-      page = 1
-    }
-    if (page >= this.pages) {
-      page = this.pages
-    }
-
-    if (this.currentPage == page) {
-      return;
-    }
-
-    console.log({ page });
-    $(`.page`).removeClass('ActivePage')
-    $(`.page${page}`).addClass('ActivePage')
-    this.currentPage = page
-
-  }
-
-  previousPage() {
-    this.getPageContent(this.currentPage - 1)
-  }
-  nextPage() {
-    this.getPageContent(this.currentPage + 1)
-  }
 
 
   changeVendorStatusGraph(x: any, y: any) {
@@ -135,14 +112,15 @@ export class OrderManagementComponent implements OnInit {
   }
 
   displayOrderDetails(id: string) {
-    $(".orderTable").hide(200)
-    $(".OrderDetailsSec").show(300)
+    // $(".orderTable").hide(200)
+    // $(".OrderDetailsSec").show(300)
     this._Router.navigateByUrl(`admin/order/${id}/details`)
   }
 
   closeOrderDetailsSec() {
-    $(".OrderDetailsSec").hide(200)
-    $(".orderTable").show(300)
-  }
+    // $(".OrderDetailsSec").hide(200)
+    // $(".orderTable").show(300)
+    this._Router.navigateByUrl(`admin/order`)
 
+  }
 }

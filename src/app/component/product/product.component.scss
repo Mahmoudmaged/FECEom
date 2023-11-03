@@ -1,0 +1,14 @@
+@import '../order-management/order-management.component.scss';
+
+.available i{
+  color: green;
+}
+
+.unavailable i{
+  color: $redColor;
+}
+
+.addProductBtn {
+  border-radius: 15px;
+  padding: 10px 5px;
+}

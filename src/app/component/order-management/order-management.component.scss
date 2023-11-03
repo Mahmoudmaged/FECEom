@@ -11,6 +11,7 @@ $redColor: #D80008;
     padding: 0px;
     margin: 0px;
     // overflow-x: hidden;
+
 }
 
 .head_title {
@@ -189,18 +190,19 @@ table td:last-child {
     box-shadow: 5px 5px 20px 2px $lighterGrayColor;
 
 }
-.orderDetailsImage{
+
+.orderDetailsImage {
     border: 1px solid $lightGray;
     border-radius: 15px;
 }
-.OrderDetailsInfo{
+
+.OrderDetailsInfo {
     color: $redColor;
 }
-.OrderDetailsSec{
-    display: none;
-}
-.fa-times{
+
+// .OrderDetailsSec{
+//     display: none;
+// }
+.fa-times {
     cursor: pointer;
 }
-
-

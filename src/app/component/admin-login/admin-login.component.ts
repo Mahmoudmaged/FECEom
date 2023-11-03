@@ -49,7 +49,7 @@ export class AdminLoginComponent {
 
   loginForm = new FormGroup({
     email: new FormControl('', [Validators.email, Validators.required]),
-    password: new FormControl('', [Validators.pattern(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/), Validators.required]),
+    password: new FormControl('', [Validators.required]),
   })
 
   forgetCode = new FormGroup({
@@ -69,15 +69,16 @@ export class AdminLoginComponent {
       password: this.loginForm.controls.password.value,
     }
     this._AuthService.signIn(Data).subscribe(res => {
-      if (res.message == "Done") {
-        this.load = false;
-        //set token localStorage
-        localStorage.setItem('token', res.token);
-        //redirect homePage
-        this._Router.navigateByUrl("/profile")
-        //Navigate DashBored
-        this.loginForm.reset();
-      }
+   
+      this.load = false;
+      //set token localStorage
+      localStorage.setItem('token', res.token);
+      localStorage.setItem('user', JSON.stringify(res.user));
+      //redirect homePage
+      this._Router.navigateByUrl("/admin")
+      //Navigate DashBored
+      this.loginForm.reset();
+
     },
       err => {
         this.load = false;
@@ -93,7 +94,9 @@ export class AdminLoginComponent {
         } else if (message == "In-valid Password") {
           this.loginErrorMessage = "Please enter the correct password";
         } else {
-          this.loginErrorMessage = `${message}`;
+          // this.loginErrorMessage = `${message}`;
+          this.loginErrorMessage = `In-valid login data`;
+
         }
       }
     )

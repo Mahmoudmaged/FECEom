@@ -31,22 +31,22 @@ $redColor: #D80008;
     box-shadow: 5px 5px 20px 2px $lighterGrayColor;
     background-color: $whiteColor;
     // 
-    max-height: 600px;
+    // max-height: 650px;
     // 
 }
 
 .imageContainer img {
-    width: 80%;
+    width: 40%;
     padding: 5px;
 
 }
 
 .contentList {
     border-top: 1px solid $middleGrayColor;
-    // border-bottom: 1px solid $middleGrayColor;
+    border-bottom: 1px solid $middleGrayColor;
     // 
-    max-height: 400px;
-    overflow-y: scroll;
+    // max-height: 450px;
+    // overflow-y: scroll;
     // 
 }
 
@@ -80,14 +80,15 @@ $redColor: #D80008;
     // bottom: 1%;
     // left: 0%;
     // right: 0%;
-    position: absolute;
-    width: 100%;
-    bottom: 0%;
+    // position: absolute;
+    // width: 100%;
+    // bottom: 0%;
     padding: 15px 5px;
     text-align: center;
     color: $redColor ;
     // background-color: black;
-    border-top: 1px solid $middleGrayColor;
+    // border-top: 1px solid $middleGrayColor;
+    background-color: $whiteColor;
 
 }
 
