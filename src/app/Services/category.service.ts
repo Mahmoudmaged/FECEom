@@ -8,14 +8,33 @@ import { Observable } from 'rxjs';
 export class CategoryService {
 
   baseURL = `https://sislimoda.com/api/Category/`;
-  token: any = `Hamada__` + localStorage.getItem("token");
+  // token: any = localStorage.getItem("token");
   constructor(private _HttpClient: HttpClient, private _Router: Router) {
-    this.token = `Hamada__` + localStorage.getItem("token")
+    // this.token = localStorage.getItem("token")
   }
 
 
   categoryList(): Observable<any> {
     return this._HttpClient.get(`${this.baseURL}GetAllMainCategory`);
+  }
+
+  getListOfSubCategoriesById(id: any): Observable<any> {
+    return this._HttpClient.get(`${this.baseURL}GetAllSubById?catId=${id}`)
+  }
+
+
+  getCategoryWithId(id: any): Observable<any> {
+    return this._HttpClient.get(`${this.baseURL}GetById?catId=${id}`)
+  }
+  addCategory(data: any): Observable<any> {
+    return this._HttpClient.post(`${this.baseURL}Add`, data);
+  }
+
+  updateCategory(data: any): Observable<any> {
+    return this._HttpClient.post(`${this.baseURL}Update`, data);
+  }
+  deleteCategoryById(id: any): Observable<any> {
+    return this._HttpClient.post(`${this.baseURL}Delete?id=${id}`, {});
   }
 
 }

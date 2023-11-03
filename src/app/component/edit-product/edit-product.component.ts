@@ -18,6 +18,7 @@ export class EditProductComponent implements OnInit {
   categoryList: any = []
   brandList: any = []
   images: any = [];
+  optionList: any = []
   errorMessage: string = ''
 
   userInfo: any;
@@ -34,6 +35,8 @@ export class EditProductComponent implements OnInit {
     this.getAllCategory()
     this.getAllBrands()
     this.getProductByID(this._ActivatedRoute.snapshot.paramMap.get('id')!)
+    this.getAllOption()
+
   }
 
 
@@ -54,7 +57,7 @@ export class EditProductComponent implements OnInit {
         this.selectedImage = e.target.result;
         console.log({ im: this.selectedImage });
 
-        return this._AttachmentsService.uploadAttachBase64({ fileName: event.target.files[i].name, file: this.selectedImage }).subscribe(res => {
+        return this._AttachmentsService.uploadAttachBase64({ fileName: event.target.files[i].name, file: this.selectedImage.split("base64,")[1] }).subscribe(res => {
           this.imagesList.push({
 
             photoId: res
@@ -75,6 +78,16 @@ export class EditProductComponent implements OnInit {
 
   }
 
+  getAllOption() {
+    return this._ProductService.getOptionList().subscribe(res => {
+      console.log({ res });
+      this.optionList = res;
+    }, err => {
+      console.log({ err });
+
+    }
+    )
+  }
   getAllCategory() {
     return this._CategoryService.categoryList().subscribe(res => {
       console.log({ res });
@@ -146,6 +159,19 @@ export class EditProductComponent implements OnInit {
       this.errorMessage = "Image is required"
     }
 
+    let selectedOptions = []
+    if (this.addProductForm.controls.productOptions.value) {
+      let selectOptions = this.addProductForm.controls.productOptions.value
+      for (let i = 0; i < selectOptions.length; i++) {
+        selectedOptions.push({
+          optionId: selectOptions[i],
+          price: 0
+        })
+
+      }
+
+    }
+
     let data = {
       id: this.product.id,
       name: this.addProductForm.controls.productName.value,
@@ -165,19 +191,20 @@ export class EditProductComponent implements OnInit {
       defaultPhotoId: this.imagesList.length ? this.imagesList[0].photoId : this.product.defaultPhotoId,
       categoryId: this.addProductForm.controls.category.value,
       brandId: this.addProductForm.controls.brand.value,
-      vendorId: this.userInfo.id,
+      vendorId:  "06eff051-2254-4eb7-d4fc-08dbbb387eb9" , //this.userInfo.id,,
       paymentType: "string",
       noteForReturn: this.addProductForm.controls.noteForReturn.value || 'string',
       amount: this.addProductForm.controls.amount.value,
-      productImages: this.imagesList.length?  this.imagesList : this.product.imagesList ,
-      productOptions: [],
+      productImages: this.imagesList.length ? this.imagesList : this.product.imagesList,
+      productOptions: selectedOptions.length ? selectedOptions : [],
       productDetails: [],
 
 
 
     }
-    this._ProductService.updateProduct(JSON.stringify(data)).subscribe(res => {
+    this._ProductService.updateProduct(data).subscribe(res => {
       console.log({ res });
+      this._Router.navigateByUrl("/admin/product")
     },
       err => {
         console.log({ err });

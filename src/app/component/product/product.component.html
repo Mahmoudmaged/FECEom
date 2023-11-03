@@ -77,7 +77,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div *ngIf="userInfo.isUser" class="col-md-3 col-6 my-1">
+                        <div *ngIf="userInfo.isVendor" class="col-md-3 col-6 my-1">
                             <div class="ms-1">
                                <button class="btn btn-danger addProductBtn w-100" (click)="addProduct()">Add <i class="fa fa-plus mx-1"></i></button>
                             </div>
@@ -122,8 +122,8 @@
                     </td>
 
                     <td class="optionsActions">
-                        <span *ngIf="userInfo.isUser" class="p-1" (click)="updateProductDetails(product.id)"> <i class="fa fa-edit"></i></span>
-                        <span class="p-1"> <i class="fa fa-trash"></i></span>
+                        <span *ngIf="userInfo.isVendor" class="p-1" (click)="updateProductDetails(product.id)"> <i class="fa fa-edit"></i></span>
+                        <span class="p-1"  (click)="deleteProduct(product.id)"> <i class="fa fa-trash"></i></span>
                         <span class="p-1" (click)="displayProductDetails(product.id)"> <i class="fa fa-ellipsis-v"
                                 aria-hidden="true"></i></span>
 

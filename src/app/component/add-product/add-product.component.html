@@ -196,9 +196,10 @@
 
                             <select multiple [(ngModel)]="selectedValues" formControlName="productOptions"
                                 class="form-select " aria-label=".form-select-lg example">
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
+                            
+                                <option *ngFor="let option of optionList ;  index as i" [value]="option.id"
+                                [selected]="i==0">
+                                {{option.nameEn }}</option>
                             </select>
 
 

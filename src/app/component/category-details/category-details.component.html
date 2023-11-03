@@ -1,0 +1,103 @@
+
+<div class="head">
+    <div class="row">
+        <div class="col-lg-4 col-md-5 col-12">
+            <h4 class="head_title">Category Management</h4>
+            <p class="my-1">View list of category and modify them....</p>
+        </div>
+
+        <div class="col-lg-8 col-md-7 col-12">
+            <div class="row">
+                <div class="col-md-12 col-12">
+                    <div class="searchInputContainer">
+                        <input type="text" placeholder="Search results " class="w-100 searchInput">
+                        <i class="fa fa-search"></i>
+                    </div>
+                </div>
+                <div class="col-md-1"></div>
+                <!-- <div class="col-md-3 col-4">
+                    <div class="ms-1">
+                        <div class="search_dropdown">
+                            <button (click)="showDropDown('search_dropdownMenuButton1', 'dropdown-menu-list1')"
+                                class="btn dropdown-toggle w-100 search_dropdownMenuButton  search_dropdown_btn search_dropdownMenuButton1"
+                                type="button" id="dropdownMenuButton" aria-haspopup="true" aria-expanded="false">
+                                New
+                            </button>
+                            <div class="dropdown-menu-list  dropdown-menu-list1">
+                                <span class="dropdown-item"
+                                    (click)="changeOrderStatus('search_dropdownMenuButton1','Category')">
+                                    Category</span>
+                                <span class="dropdown-item my-1"
+                                    (click)="changeOrderStatus('search_dropdownMenuButton1','Notifications')">
+                                    Subcategory</span>
+
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+            </div>
+        </div>
+
+    </div>
+
+
+
+
+    <div class="row  categoryContainer my-2">
+        <div class="head p-3 text-light">
+            <h5>Category Details</h5>
+        </div>
+        <div class="categoryContainerBody p-5 ">
+            <div class="row p-3">
+                <div class="col-md-4  my-2">
+                    <div class="p-2">
+                        <div>
+                            <img class="img-fluid" src="{{category?.categoryPhoto?.fullLink}}" alt="" srcset="">
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-8 my-2">
+                    <div class="p-2">
+                        <div>
+                            <h3>{{category.nameEn}}</h3>
+                            <p class="my-2  ps-3">{{category.description}}</p>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-12 my-2">
+                    <div class="p-2">
+                        <div class="text-end">
+                            <button class="btn btn-outline-info px-3 py-2 mx-2"
+                                (click)="showUpdateCategory(category.id)">Update</button>
+                            <button class="btn btn-danger px-3 py-2 mx-2"
+                                (click)="deleteCategory(category.id)">Delete</button>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+           
+            <div *ngIf="categoryList.length">
+                <hr>
+                <div class="row p-3">
+                    <h4>Subcategories</h4>
+                    <div *ngFor="let category of categoryList ; index as i" class="col-lg-3 col-md-6  my-2">
+                        <div class="p-3" (click)="getCategoryDetails(category.id)">
+                            <div class="imageConatiner">
+                                <img src="{{category.categoryPhoto?.fullLink}}" alt="" srcset="">
+                            </div>
+                            <div class="w-100  text-center my-2">
+                                <p class="categoryName">{{category.nameEn}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

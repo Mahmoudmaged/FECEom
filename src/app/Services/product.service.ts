@@ -31,6 +31,11 @@ export class ProductService {
 
   }
 
+  getOptionList(): Observable<any> {
+    return this._HttpClient.get(`https://sislimoda.com/api/Option/GetAll`);
+
+  }
+
   addProduct(data: any): Observable<any> {
     return this._HttpClient.post(`${this.baseURL}Add`, data);
 
@@ -38,6 +43,11 @@ export class ProductService {
 
   updateProduct(data: any): Observable<any> {
     return this._HttpClient.post(`${this.baseURL}Update`, data);
+
+  }
+
+  deleteProductById(id: any): Observable<any> {
+    return this._HttpClient.post(`${this.baseURL}Delete?id=${id}`, {});
 
   }
 }

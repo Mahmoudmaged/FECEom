@@ -28,7 +28,6 @@ export class ProductComponent implements OnInit {
     private _CategoryService: CategoryService,
     private _BrandService: BrandService) {
     this.userInfo = JSON.parse(localStorage.getItem('user')!);
-    this.userInfo.isUser = false
     this.photo = this.userInfo?.photo || this.photo;
     this.getAllCategory()
     this.getAllBrands()
@@ -63,9 +62,13 @@ export class ProductComponent implements OnInit {
   getAllProducts() {
 
     if (this.userInfo.isUser) {
-      return this._ProductService.getProductsListByVendor(this.userInfo.id).subscribe(res => {
+      "06eff051-2254-4eb7-d4fc-08dbbb387eb9"
+      // this.userInfo.id
+      return this._ProductService.getProductsListByVendor("06eff051-2254-4eb7-d4fc-08dbbb387eb9").subscribe(res => {
         console.log({ res });
-        this.pages = parseInt(`${res.length / this.pageSize}`);
+        this.pages = Math.ceil(res.length / this.pageSize);//(`${res.length / this.pageSize}`);
+        console.log(this.pages);
+
         this.fullProductList = res;
         this.productList = this.fullProductList.slice(0, this.pageSize);
       }, err => {
@@ -76,7 +79,7 @@ export class ProductComponent implements OnInit {
     } else {
       return this._ProductService.getProductsList().subscribe(res => {
         console.log({ res });
-        this.pages = parseInt(`${res.length / this.pageSize}`);
+        this.pages = Math.ceil(res.length / this.pageSize);
         this.fullProductList = res;
         this.productList = this.fullProductList.slice(0, this.pageSize);
       }, err => {
@@ -180,6 +183,15 @@ export class ProductComponent implements OnInit {
   }
   updateProductDetails(id: string) {
     this._Router.navigateByUrl(`admin/product/${id}/update`)
+  }
+  deleteProduct(id: string) {
+    this._ProductService.deleteProductById(id).subscribe(res => {
+      console.log({ res });
+      this.currentPage = 1;
+      return this.getAllProducts()
+    }, err => {
+      alert("Some thing went wrong")
+    })
   }
   addProduct() {
     this._Router.navigateByUrl(`admin/product/add`)

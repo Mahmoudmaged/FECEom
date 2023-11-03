@@ -13,7 +13,7 @@ const routes: Routes = [
     component:AdministrationComponent,
     loadChildren: () => import('./component/administration/admin/admin.module').then(mod=>mod.AdminModule)
   },
-  { path: "login", component: AdminLoginComponent },
+  { path: "", component: AdminLoginComponent },
   { path: "vendorLogin", component: VendorLoginComponent },
 
   // { path: "admin", canActivate: [AuthGuard], component: AdminComponent },

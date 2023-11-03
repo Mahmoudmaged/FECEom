@@ -26,6 +26,13 @@ import { ProductComponent } from './component/product/product.component';
 import { ProductDetailsComponent } from './component/product-details/product-details.component';
 import { AddProductComponent } from './component/add-product/add-product.component';
 import { EditProductComponent } from './component/edit-product/edit-product.component';
+import { CategoryComponent } from './component/category/category.component';
+import { AddCategoryComponent } from './component/add-category/add-category.component';
+import { EditCategoryComponent } from './component/edit-category/edit-category.component';
+import { AddSubcategoryComponent } from './component/add-subcategory/add-subcategory.component';
+import { EditSubcategoryComponent } from './component/edit-subcategory/edit-subcategory.component';
+import { SubcategoryComponent } from './component/subcategory/subcategory.component';
+import { CategoryDetailsComponent } from './component/category-details/category-details.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -45,7 +52,14 @@ import { EditProductComponent } from './component/edit-product/edit-product.comp
     ProductComponent,
     ProductDetailsComponent,
     AddProductComponent,
-    EditProductComponent
+    EditProductComponent,
+    CategoryComponent,
+    AddCategoryComponent,
+    EditCategoryComponent,
+    AddSubcategoryComponent,
+    EditSubcategoryComponent,
+    SubcategoryComponent,
+    CategoryDetailsComponent
   ],
   imports: [
     BrowserModule,

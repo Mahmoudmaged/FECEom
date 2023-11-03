@@ -1,0 +1,53 @@
+$whiteColor: #ffffff;
+$blackColor: #000000;
+$lightGreen: #81ffca;
+$lightPink: #FFDCDC;
+$middlePink: #FFEDC3;
+$lightGray: #d1d1d1;
+$lighterGrayColor: #EFEFFF; //grayColor
+$middleGrayColor: #EAEAFF;
+$redColor: #D80008;
+
+@import '../order-management/order-management.component.scss';
+
+* {
+    padding: 0px;
+    margin: 0px;
+    // overflow: hidden;
+}
+
+.categoryContainer {
+    // background-color: $blackColor;
+    border-radius: 15px;
+    border: 0px solid transparent;
+}
+
+.categoryContainer .head {
+    background-color: $blackColor;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border: 0px solid transparent;
+}
+
+.categoryContainerBody {
+    background-color: $whiteColor;
+}
+
+.imageConatiner {
+    text-align: center;
+}
+
+.imageConatiner img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: 1px solid $blackColor;
+    margin: auto;
+    cursor: pointer;
+}
+
+.addProductBtn {
+    border-radius: 15px;
+    padding: 10px 5px;
+}
+

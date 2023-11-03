@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AttachmentsService } from 'src/app/Services/attachments.service';
@@ -11,15 +11,19 @@ import { ProductService } from 'src/app/Services/product.service';
   templateUrl: './add-product.component.html',
   styleUrls: ['./add-product.component.scss']
 })
-export class AddProductComponent {
+export class AddProductComponent implements OnInit {
 
   selectedValues: string[] = [];
   categoryList: any = []
+  optionList: any = []
   brandList: any = []
   images: any = [];
   errorMessage: string = ''
 
   userInfo: any;
+  selectedImage: string = '';
+  imagesList: any = []
+
 
 
   constructor(private _Router: Router,
@@ -31,12 +35,12 @@ export class AddProductComponent {
     this.userInfo = JSON.parse(localStorage.getItem('user')!);
     this.getAllCategory()
     this.getAllBrands()
+    this.getAllOption()
   }
 
 
 
-  selectedImage: string = '';
-  imagesList: any = []
+
 
 
   selectImage(event: any) {
@@ -47,11 +51,8 @@ export class AddProductComponent {
       const reader = new FileReader();
       reader.onload = (e: any) => {
         this.selectedImage = e.target.result;
-        console.log({ im: this.selectedImage });
-
-        return this._AttachmentsService.uploadAttachBase64({ fileName: event.target.files[i].name, file: this.selectedImage }).subscribe(res => {
+        return this._AttachmentsService.uploadAttachBase64({ fileName: event.target.files[i].name, file: this.selectedImage.split("base64,")[1] }).subscribe(res => {
           this.imagesList.push({
-
             photoId: res
           })
           console.log({ res });
@@ -70,6 +71,16 @@ export class AddProductComponent {
 
   }
 
+  getAllOption() {
+    return this._ProductService.getOptionList().subscribe(res => {
+      console.log({ res });
+      this.optionList = res;
+    }, err => {
+      console.log({ err });
+
+    }
+    )
+  }
   getAllCategory() {
     return this._CategoryService.categoryList().subscribe(res => {
       console.log({ res });
@@ -117,6 +128,20 @@ export class AddProductComponent {
     if (!this.imagesList.length) {
       this.errorMessage = "Image is required"
     }
+    console.log({ im: this.imagesList });
+
+    let selectedOptions = []
+    if (this.addProductForm.controls.productOptions.value) {
+      let selectOptions = this.addProductForm.controls.productOptions.value
+      for (let i = 0; i < selectOptions.length; i++) {
+        selectedOptions.push({
+          optionId: selectOptions[i],
+          price: 0
+        })
+
+      }
+
+    }
 
     let data = {
       name: this.addProductForm.controls.productName.value,
@@ -138,16 +163,16 @@ export class AddProductComponent {
       defaultPhotoId: this.imagesList[0].photoId,
       categoryId: this.addProductForm.controls.category.value,
       brandId: this.addProductForm.controls.brand.value,
-      vendorId: this.userInfo.id,
+      vendorId: "06eff051-2254-4eb7-d4fc-08dbbb387eb9",//this.userInfo.id ,//"06eff051-2254-4eb7-d4fc-08dbbb387eb9",
       paymentType: "string",
       noteForReturn: this.addProductForm.controls.noteForReturn.value || 'string',
       amount: this.addProductForm.controls.amount.value,
       productImages: this.imagesList,
-      productOptions: [],
+      productOptions: selectedOptions.length ? selectedOptions : [],
       productDetails: [],
 
 
-  
+
     }
     // let data = {
     //   "name": this.addProductForm.controls.productName.value,
@@ -181,10 +206,12 @@ export class AddProductComponent {
     // }
     console.log({ data });
 
-    this._ProductService.addProduct(JSON.stringify(data)).subscribe(res => {
+    this._ProductService.addProduct(data).subscribe(res => {
       console.log({ res });
+      this._Router.navigateByUrl("/admin/product")
     },
       err => {
+        alert("Some thing went wrong")
         console.log({ err });
 
       }
@@ -192,37 +219,9 @@ export class AddProductComponent {
   }
 
 
-  handelBasicUpdate(): any {
-    const formData = new FormData();
-
-    if (!this.images) {
-      this.errorMessage = "Image is required"
-    }
-    formData.append("image", this.images);
-
-
-    //   this._UserService.updateBasicInfo(formData).subscribe(
-    //     res => {
-    //       this.load = false;
-    //       const { message } = res
-    //       if (message == "Done") {
-    //         this.changeColor("mapDiv-card")
-    //         this.sideMessage = "Updated Successfully"
-    //         $(".sideAlert").css({ "right": "0%" })
-    //         setTimeout(() => {
-    //           $(".sideAlert").css({ "right": "-200%" })
-    //         }, 3000);
-    //         this.profileData()
-    //       }
-    //     }, err => {
-
-    //       this.load = false;
-    //       this.errorMessage = "Fail To update"
-    //     })
-  }
-
 
   ngOnInit(): void {
+
   }
 
 

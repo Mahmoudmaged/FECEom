@@ -14,6 +14,12 @@ import { ProductComponent } from '../../product/product.component';
 import { ProductDetailsComponent } from '../../product-details/product-details.component';
 import { AddProductComponent } from '../../add-product/add-product.component';
 import { EditProductComponent } from '../../edit-product/edit-product.component';
+import { CategoryComponent } from '../../category/category.component';
+import { AddCategoryComponent } from '../../add-category/add-category.component';
+import { AddSubcategoryComponent } from '../../add-subcategory/add-subcategory.component';
+import { CategoryDetailsComponent } from '../../category-details/category-details.component';
+import { EditCategoryComponent } from '../../edit-category/edit-category.component';
+import { EditSubcategoryComponent } from '../../edit-subcategory/edit-subcategory.component';
 
 const routes: Routes = [
   { path: 'financial', component: FinancialManagementComponent },
@@ -29,6 +35,12 @@ const routes: Routes = [
   { path: 'sales', component: SalesManagementComponent },
   { path: "vendor/:id/profile", component: VendorProfileComponent },
   { path: "settings", component: SettingsManagementComponent },
+  { path: "category", component: CategoryComponent },
+  { path: "category/:id/details", component: CategoryDetailsComponent },
+  { path: "category/:id/edit", component: EditCategoryComponent },
+  { path: "category/:id/sub/edit", component: EditSubcategoryComponent },
+  { path: "category/add", component: AddCategoryComponent },
+  { path: "category/add/sub", component: AddSubcategoryComponent },
   { path: "**", component:NotAvailableComponent },
 
 ];
