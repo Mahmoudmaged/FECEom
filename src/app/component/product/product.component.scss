@@ -1,14 +1,24 @@
 @import '../order-management/order-management.component.scss';
 
-.available i{
+.head {
+  min-height: 100vh;
+}
+
+.available i {
   color: green;
 }
 
-.unavailable i{
+.unavailable i {
   color: $redColor;
 }
 
 .addProductBtn {
   border-radius: 15px;
   padding: 10px 5px;
+}
+
+
+::ng-deep ul {
+  padding-left: 0 !important;
+  margin-bottom: 0 !important;
 }

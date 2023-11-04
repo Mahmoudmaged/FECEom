@@ -1,42 +1,45 @@
 @import '../user-management/user-management.component.scss';
-.head{
-    height: 100vh;
-}
-th{
-    font-size: 13px;
+
+.head {
+  height: 100vh;
 }
 
-.detailedReport{
-    background-color: $lighterGrayColor;
-    padding: 5px 10px;
-    border-radius: 15px;
-    cursor: pointer;
+th {
+  font-size: 13px;
 }
 
-.cla{
-    overflow: visible;
+.detailedReport {
+  background-color: $lighterGrayColor;
+  padding: 5px 10px;
+  border-radius: 15px;
+  cursor: pointer;
 }
 
-.applyBttonClick{
-    width: 100%;
-    background-color: $lighterGrayColor;
-    text-align: right;
+.cla {
+  overflow: visible;
 }
-.ApplyDate{
-    border-radius: 15px ;
-    padding: 5px 15px;
-    color: $whiteColor;
+
+.applyBttonClick {
+  width: 100%;
+  background-color: $lighterGrayColor;
+  text-align: right;
+}
+
+.ApplyDate {
+  border-radius: 15px;
+  padding: 5px 15px;
+  color: $whiteColor;
 
 }
 
 
 ::ng-deep {
-    .p-datepicker td>span {
-            width: 25px !important;
-            height: 25px !important;
-        }
+  .p-datepicker td>span {
+    width: 25px !important;
+    height: 25px !important;
+  }
 }
 
-::ng-deep .p-calendar .p-datepicker {
-    left: -1000px !important;
+::ng-deep.p-calendar .p-datepicker {
+  left: -340px !important;
 }

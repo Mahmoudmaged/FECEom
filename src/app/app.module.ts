@@ -14,8 +14,8 @@ import { SalesManagementComponent } from './component/sales-management/sales-man
 import { FinancialManagementComponent } from './component/financial-management/financial-management.component';
 import { SettingsManagementComponent } from './component/settings-management/settings-management.component';
 import { CalendarModule } from 'primeng/calendar';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations'
-import {NgApexchartsModule} from 'ng-apexcharts';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
+import { NgApexchartsModule } from 'ng-apexcharts';
 import { AdminLoginComponent } from './component/admin-login/admin-login.component';
 import { VendorProfileComponent } from './component/vendor-profile/vendor-profile.component';
 import { FinancialManagementReportComponent } from './component/financial-management-report/financial-management-report.component';
@@ -33,6 +33,7 @@ import { AddSubcategoryComponent } from './component/add-subcategory/add-subcate
 import { EditSubcategoryComponent } from './component/edit-subcategory/edit-subcategory.component';
 import { SubcategoryComponent } from './component/subcategory/subcategory.component';
 import { CategoryDetailsComponent } from './component/category-details/category-details.component';
+import { DropdownModule } from 'primeng/dropdown';
 @NgModule({
   declarations: [
     AppComponent,
@@ -69,8 +70,8 @@ import { CategoryDetailsComponent } from './component/category-details/category-
     CalendarModule,
     ReactiveFormsModule,
     HttpClientModule,
-    NgApexchartsModule
-
+    NgApexchartsModule,
+    DropdownModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -10,8 +10,12 @@ export class ProductService {
 
   baseURL = `https://sislimoda.com/api/Product/`;
   token: any = localStorage.getItem("token");
+
+  id!: string
   constructor(private _HttpClient: HttpClient, private _Router: Router) {
     this.token = localStorage.getItem("token")
+    this.id = JSON.parse(localStorage.getItem('user')!)?.id;
+
   }
 
 
@@ -48,6 +52,14 @@ export class ProductService {
 
   deleteProductById(id: any): Observable<any> {
     return this._HttpClient.post(`${this.baseURL}Delete?id=${id}`, {});
-
+  }
+  getByCategory(id: string): Observable<any> {
+    return this._HttpClient.get(`${this.baseURL}GetAllByCategoryId?CategoryId=${id}&UserId=${this.id}`);
+  }
+  getByBrand(id: string): Observable<any> {
+    return this._HttpClient.get(`${this.baseURL}GetAllByBrand?BrandId=${id}`);
+  }
+  Search(text: string): Observable<any> {
+    return this._HttpClient.get(`${this.baseURL}SearchByNameAndBrand?key=${text}&UserId=${this.id}`);
   }
 }

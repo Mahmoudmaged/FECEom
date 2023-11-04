@@ -17,7 +17,7 @@ const routes: Routes = [
   { path: "vendorLogin", component: VendorLoginComponent },
 
   // { path: "admin", canActivate: [AuthGuard], component: AdminComponent },
-  // {path:"**" , component:NotFoundComponent} 
+  // {path:"**" , component:NotFoundComponent}
 ];
 
 @NgModule({

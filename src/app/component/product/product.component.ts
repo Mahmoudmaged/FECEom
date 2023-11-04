@@ -11,17 +11,31 @@ declare let $: any;
   styleUrls: ['./product.component.scss']
 })
 export class ProductComponent implements OnInit {
-
+  selectedStatus: any = null
   fullProductList: any = []
+  copyProductList: any = []
   categoryList: any = []
   brandList: any = []
+  selectedCategory!: any
+  textSearch: string = ''
+  selectedBrand!: any
   productList: any = []
   pages: number = 5;
   pageSize: number = 3;
   currentPage: number = 1
   photo: string = `../../../assets/images/avatar/ava.png`
   userInfo: any;
-
+  status = [
+    {
+      isActive: "all status"
+    },
+    {
+      isActive: "available"
+    },
+    {
+      isActive: "notAvailable"
+    }
+  ]
 
   constructor(private _Router: Router,
     private _ProductService: ProductService,
@@ -41,8 +55,10 @@ export class ProductComponent implements OnInit {
 
   getAllCategory() {
     return this._CategoryService.categoryList().subscribe(res => {
-      console.log({ res });
       this.categoryList = res;
+      this.categoryList.unshift({
+        nameEn: "all categories"
+      })
     }, err => {
       console.log({ err });
 
@@ -53,6 +69,9 @@ export class ProductComponent implements OnInit {
     return this._BrandService.brandList().subscribe(res => {
       console.log({ res });
       this.brandList = res;
+      this.brandList.unshift({
+        nameEn: "all brands"
+      })
     }, err => {
       console.log({ err });
 
@@ -60,12 +79,11 @@ export class ProductComponent implements OnInit {
     )
   }
   getAllProducts() {
-
     if (this.userInfo.isUser) {
       "06eff051-2254-4eb7-d4fc-08dbbb387eb9"
       // this.userInfo.id
       return this._ProductService.getProductsListByVendor("06eff051-2254-4eb7-d4fc-08dbbb387eb9").subscribe(res => {
-        console.log({ res });
+
         this.pages = Math.ceil(res.length / this.pageSize);//(`${res.length / this.pageSize}`);
         console.log(this.pages);
 
@@ -73,7 +91,6 @@ export class ProductComponent implements OnInit {
         this.productList = this.fullProductList.slice(0, this.pageSize);
       }, err => {
         console.log({ err });
-
       }
       )
     } else {
@@ -200,4 +217,87 @@ export class ProductComponent implements OnInit {
   closeOrderDetailsSec() {
   }
 
+
+  FilterByCategory() {
+    let categoryId = this.selectedCategory?.id
+    if (categoryId) {
+      this.getAllProductsByCategoryId(categoryId)
+    } else {
+      this.getAllProducts()
+    }
+  }
+  getAllProductsByCategoryId(id: string) {
+    return this._ProductService.getByCategory(id).subscribe(res => {
+
+      this.pages = Math.ceil(res.length / this.pageSize);
+
+
+      this.fullProductList = res;
+      this.copyProductList = res;
+      this.productList = this.fullProductList.slice(0, this.pageSize);
+    }, err => {
+      console.log({ err });
+
+    })
+  }
+  FilterByBrand() {
+    let BrandId = this.selectedBrand?.id
+    if (BrandId) {
+      this.getAllProductsByBrandId(BrandId)
+    } else {
+      this.getAllProducts()
+    }
+  }
+  getAllProductsByBrandId(id: string) {
+    return this._ProductService.getByBrand(id).subscribe(res => {
+
+      this.pages = Math.ceil(res.length / this.pageSize);
+
+      this.fullProductList = res;
+      this.productList = this.fullProductList.slice(0, this.pageSize);
+    }, err => {
+      console.log({ err });
+
+    })
+  }
+  onSearch() {
+    if (this.textSearch) {
+      this._ProductService.Search(this.textSearch).subscribe(res => {
+
+        this.pages = Math.ceil(res.length / this.pageSize);
+
+        this.fullProductList = res;
+        this.productList = this.fullProductList.slice(0, this.pageSize);
+      }, err => {
+        console.log({ err });
+
+      })
+    } else {
+      this.getAllProducts()
+    }
+
+  }
+  statusChange() {
+
+    if (this.selectedStatus?.isActive == "available") {
+      this.copyProductList = this.fullProductList.filter((element: any) => {
+        return element?.isActive
+      })
+      this.pages = Math.ceil(this.copyProductList.length / this.pageSize);
+
+
+      this.productList = this.copyProductList.slice(0, this.pageSize);
+    } else if (this.selectedStatus?.isActive == "notAvailable") {
+      this.copyProductList = this.fullProductList.filter((element: any) => {
+        return element?.isActive == false
+      })
+      this.pages = Math.ceil(this.copyProductList.length / this.pageSize);
+
+
+      this.productList = this.copyProductList.slice(0, this.pageSize);
+    }
+    else if (this.selectedStatus?.isActive == "all status") {
+      this.getAllProducts()
+    }
+  }
 }

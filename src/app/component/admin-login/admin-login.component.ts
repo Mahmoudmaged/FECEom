@@ -69,7 +69,7 @@ export class AdminLoginComponent {
       password: this.loginForm.controls.password.value,
     }
     this._AuthService.signIn(Data).subscribe(res => {
-   
+
       this.load = false;
       //set token localStorage
       localStorage.setItem('token', res.token);

@@ -9,86 +9,86 @@ $middleGrayColor: #EAEAFF;
 $redColor: #D80008;
 
 * {
-    padding: 0px;
-    margin: 0px;
-    overflow-x: hidden;
+  padding: 0px;
+  margin: 0px;
+  overflow-x: hidden;
 }
 
 .dashBoard {
-    height: 100%;
-    overflow: hidden;
+  height: 100%;
+  overflow: hidden;
 }
 
 .dashBoard ::-webkit-scrollbar {
-    display: none;
+  display: none;
 }
 
 // Start SideNav
 .sideNav {
-    position: relative;
-    border: 0px transparent;
-    border-radius: 25px;
-    box-shadow: 5px 5px 20px 2px $lighterGrayColor;
-    background-color: $whiteColor;
-    // 
-    // max-height: 650px;
-    // 
+  position: relative;
+  border: 0px transparent;
+  border-radius: 25px;
+  box-shadow: 5px 5px 20px 2px $lighterGrayColor;
+  background-color: $whiteColor;
+  //
+  // max-height: 650px;
+  //
 }
 
 .imageContainer img {
-    width: 40%;
-    padding: 5px;
+  width: 40%;
+  padding: 5px;
 
 }
 
 .contentList {
-    border-top: 1px solid $middleGrayColor;
-    border-bottom: 1px solid $middleGrayColor;
-    // 
-    // max-height: 450px;
-    // overflow-y: scroll;
-    // 
+  border-top: 1px solid $middleGrayColor;
+  border-bottom: 1px solid $middleGrayColor;
+  //
+  // max-height: 450px;
+  // overflow-y: scroll;
+  //
 }
 
 
 .contentList ul li {
-    font-size: 14px;
-    cursor: pointer;
+  font-size: 14px;
+  cursor: pointer;
 }
 
 .listItem .fa-circle {
-    font-size: 8px;
-    display: none;
+  font-size: 8px;
+  display: none;
 }
 
 .listItem1 .fa-circle {
-    display: inline-block;
+  display: inline-block;
 }
 
 
 .ActiveCheck {
-    background-color: $blackColor;
-    font-size: 14px;
-    border-radius: 15px;
-    color: $whiteColor;
+  background-color: $blackColor;
+  font-size: 14px;
+  border-radius: 15px;
+  color: $whiteColor;
 }
 
 .sideNav_footer {
-    // border-top: 1px solid $$middleGrayColor;
-    // position: absolute;
-    // vertical-align: middle;
-    // bottom: 1%;
-    // left: 0%;
-    // right: 0%;
-    // position: absolute;
-    // width: 100%;
-    // bottom: 0%;
-    padding: 15px 5px;
-    text-align: center;
-    color: $redColor ;
-    // background-color: black;
-    // border-top: 1px solid $middleGrayColor;
-    background-color: $whiteColor;
+  // border-top: 1px solid $$middleGrayColor;
+  // position: absolute;
+  // vertical-align: middle;
+  // bottom: 1%;
+  // left: 0%;
+  // right: 0%;
+  // position: absolute;
+  // width: 100%;
+  // bottom: 0%;
+  padding: 15px 5px;
+  text-align: center;
+  color: $redColor ;
+  // background-color: black;
+  // border-top: 1px solid $middleGrayColor;
+  background-color: $whiteColor;
 
 }
 
@@ -97,67 +97,67 @@ $redColor: #D80008;
 // Start RightPart Head Section
 .profileAndLang {
 
-    background-color: $lightGray;
-    border-radius: 15px;
-    position: relative;
+  background-color: $lightGray;
+  border-radius: 15px;
+  position: relative;
 }
 
 .container_profile_Image {
-    position: relative;
+  position: relative;
 }
 
 .container_profile_Image .fa-circle {
-    position: absolute;
-    left: 0%;
-    bottom: 2%;
-    z-index: 111;
+  position: absolute;
+  left: 0%;
+  bottom: 2%;
+  z-index: 111;
 }
 
 .profileImage {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
 }
 
 .profileAndLang .fa-circle {
-    color: green;
-    position: absolute;
+  color: green;
+  position: absolute;
 }
 
 .changeLang {
-    border-left: 2px solid $lighterGrayColor;
+  border-left: 2px solid $lighterGrayColor;
 
 }
 
 .changeLang div {
-    background-color: $whiteColor;
-    border: 1px solid $lightGray;
-    border-radius: 10px;
+  background-color: $whiteColor;
+  border: 1px solid $lightGray;
+  border-radius: 10px;
 }
 
 .commentNotify {
-    position: relative;
+  position: relative;
 }
 
 .commentNotify .fa-circle {
-    position: absolute;
-    right: 1%;
-    top: 0%;
+  position: absolute;
+  right: 1%;
+  top: 0%;
 }
 
 .commentNotify2 .fa-circle {
-    position: absolute;
-    left: 15%;
-    top: 1%;
-    color: $redColor;
+  position: absolute;
+  left: 15%;
+  top: 1%;
+  color: $redColor;
 }
 
 
 // Nested component
 .componentSection {
-    display: none;
+  display: none;
 }
 
 .order {
-    display: block;
+  display: block;
 }
