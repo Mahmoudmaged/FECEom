@@ -34,6 +34,8 @@ import { EditSubcategoryComponent } from './component/edit-subcategory/edit-subc
 import { SubcategoryComponent } from './component/subcategory/subcategory.component';
 import { CategoryDetailsComponent } from './component/category-details/category-details.component';
 import { DropdownModule } from 'primeng/dropdown';
+import { OfferComponent } from './component/offer/offer.component';
+import { AddOfferComponent } from './component/add-offer/add-offer.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -60,7 +62,9 @@ import { DropdownModule } from 'primeng/dropdown';
     AddSubcategoryComponent,
     EditSubcategoryComponent,
     SubcategoryComponent,
-    CategoryDetailsComponent
+    CategoryDetailsComponent,
+    OfferComponent,
+    AddOfferComponent
   ],
   imports: [
     BrowserModule,

@@ -1,1 +1,214 @@
-<p>add-offer works!</p>
+<div class="head">
+  <div class="row">
+    <div class="col-lg-4 col-md-5 col-12">
+      <h4 class="head_title">Offers</h4>
+      <p class="my-1">View all offers and their details....</p>
+    </div>
+
+    <div class="col-lg-8 col-md-7 col-12">
+      <div class="row">
+        <div class="col-md-12 col-12">
+          <!-- <div class="searchInputContainer">
+            <input type="text" placeholder="Search results " class="w-100 searchInput">
+            <i class="fa fa-search"></i>
+          </div> -->
+        </div>
+        <!-- <div class="col-md-1"></div>
+              <div class="col-md-3 col-4">
+                  <div class="ms-1">
+                      <div class="search_dropdown">
+                          <button (click)="showDropDown('search_dropdownMenuButton1', 'dropdown-menu-list1')"
+                              class="btn dropdown-toggle w-100 search_dropdownMenuButton  search_dropdown_btn search_dropdownMenuButton1"
+                              type="button" id="dropdownMenuButton" aria-haspopup="true" aria-expanded="false">
+                             New
+                          </button>
+                          <div class="dropdown-menu-list  dropdown-menu-list1">
+                              <span class="dropdown-item"
+                                  (click)="changeOrderStatus('search_dropdownMenuButton1','Category')">
+                                  Category</span>
+                              <span class="dropdown-item my-1"
+                                  (click)="changeOrderStatus('search_dropdownMenuButton1','Notifications')">
+                                  Subcategory</span>
+
+                          </div>
+                      </div>
+                  </div>
+              </div> -->
+      </div>
+    </div>
+
+  </div>
+  <div class="row  categoryContainer my-2">
+    <div class="head p-3 text-light">
+      <h5>Add New Offer</h5>
+
+    </div>
+    <div class="categoryContainerBody p-5 ">
+      <div class="p-3">
+        <form [formGroup]="addOfferForm" (ngSubmit)="addOfferForm.valid &&handelAddOffer()">
+          <div class="row pe-5">
+            <div class="col-lg-4  uploadParent my-2">
+              <div class="p-3 w-100 text-center">
+                <div class="uploadDiv p-2 text-center">
+                  <i class="fa fa-file fa-5x"></i>
+                  <p>Attach image here to start uploading</p>
+                  <p>or</p>
+                  <label for="uploadImage" class="btn btn-primary browseFile px-3 py-2">Browse file</label>
+                  <input formControlName="photoId" class="d-none" multiple type="file" id="uploadImage"
+                    (change)="selectImage($event)">
+                  <div *ngIf="addOfferForm.controls['photoId'].errors && addOfferForm.controls['photoId'].touched"
+                    class="text-center my-1 xx">
+                    <p>In-valid offer image</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-8"></div>
+            <div class="col-6 my-2">
+              <div class="p-2">
+                <div>
+                  <p>name</p>
+                  <div class="form-group">
+                    <input type="text" formControlName="title" class="form-control" />
+                    <div *ngIf="addOfferForm.controls['title'].errors && addOfferForm.controls['title'].touched"
+                      class="text-center my-1 xx">
+                      <p>In-valid title</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-6 my-2">
+              <div class="p-2">
+                <div>
+                  <p>nameEN</p>
+                  <div class="form-group">
+                    <input type="text" formControlName="titleEn" class="form-control" />
+                    <div *ngIf="addOfferForm.controls['titleEn'].errors && addOfferForm.controls['titleEn'].touched"
+                      class="text-center my-1 xx">
+                      <p>In-valid offer titleEn </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-6 my-2">
+              <div class="p-2">
+                <div>
+                  <p>Description</p>
+                  <div class="form-group">
+                    <textarea formControlName="description" class="form-control" name="" id="" cols="30"
+                      rows="3"></textarea>
+
+                    <div
+                      *ngIf="addOfferForm.controls['description'].errors && addOfferForm.controls['description'].touched"
+                      class="text-center my-1 xx">
+                      <p>In-valid offer description</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-6 my-2">
+              <div class="p-2">
+                <div>
+                  <p>DescriptionEn</p>
+                  <div class="form-group">
+                    <textarea formControlName="descriptionEn" class="form-control" name="" id="" cols="30"
+                      rows="3"></textarea>
+                    <div
+                      *ngIf="addOfferForm.controls['descriptionEn'].errors && addOfferForm.controls['descriptionEn'].touched"
+                      class="text-center my-1 xx">
+                      <p>In-valid offer descriptionEn</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 my-2">
+              <div class="p-2">
+                <div>
+                  <p>Discount code</p>
+                  <div class="form-group">
+                    <input type="text" formControlName="code" class="form-control" />
+
+                    <div *ngIf="addOfferForm.controls['code'].errors && addOfferForm.controls['code'].touched"
+                      class="text-center my-1 xx">
+                      <p>In-valid offer code </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 my-2">
+              <div class="p-2">
+                <div>
+                  <p>Offer Rate</p>
+                  <div class="form-group">
+                    <input type="text" formControlName="percent" class="form-control" />
+
+                    <div *ngIf="addOfferForm.controls['percent'].errors && addOfferForm.controls['percent'].touched"
+                      class="text-center my-1 xx">
+                      <p>In-valid offer percent </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 my-2">
+              <div class="p-2">
+                <div>
+                  <p>Offer Type</p>
+                  <div class="form-group">
+                    <input type="text" formControlName="offerType" class="form-control" />
+                    <div *ngIf="addOfferForm.controls['offerType'].errors && addOfferForm.controls['offerType'].touched"
+                      class="text-center my-1 xx">
+                      <p>In-valid offerType </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 my-2">
+              <div class="p-2">
+                <p>Start Date</p>
+                <p-calendar formControlName="startDate" class="bg-danger">
+                </p-calendar>
+                <div *ngIf="addOfferForm.controls['startDate'].errors && addOfferForm.controls['startDate'].touched"
+                  class="text-center my-1 xx">
+                  <p>In-valid offer startDate</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4  my-2">
+              <div class="p-2">
+                <p>End Date</p>
+                <p-calendar formControlName="endDate">
+                </p-calendar>
+                <div *ngIf="addOfferForm.controls['endDate'].errors && addOfferForm.controls['endDate'].touched"
+                  class="text-center my-1 xx">
+                  <p>In-valid offer endDate</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-12  my-2">
+              <div class="p-2">
+                <p>Offer state</p>
+                <div class="form-check form-switch d-flex justify-content-between border border-2 rounded-2 p-2">
+                  <label class="form-check-label" for="flexSwitchCheckChecked">Active</label>
+                  <input class="form-check-input mt-1" formControlName="isActive" type="checkbox" role="switch"
+                    id="flexSwitchCheckChecked" checked>
+                </div>
+              </div>
+            </div>
+            <div class="w-100 text-end mt-4 mb-2 ">
+              <button type="submit" class="btn btn-dark px-5 py-2 my-1" ><span
+                  class="px-2">Add</span></button>
+              <button type=" button" class="btn btn-outline-dark px-5 py-2 ms-2 my-1" (click)="close()">Cancel</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

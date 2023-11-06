@@ -14,7 +14,7 @@ export class AttachmentsService {
 
 
   uploadAttachBase64(data: any): Observable<any> {
-    return this._HttpClient.post(`${this.baseURL}upload`,data);
+    return this._HttpClient.post(`${this.baseURL}upload`, data);
   }
 
   isLoggedIn() {
