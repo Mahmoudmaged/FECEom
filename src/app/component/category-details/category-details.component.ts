@@ -8,8 +8,38 @@ declare let $: any;
   styleUrls: ['./category-details.component.scss']
 })
 export class CategoryDetailsComponent {
-  categoryList: any = []
+  originalCategoryList: any[] = []
+  categoryList: any[] = []
   category: any;
+  textSearch: string = ''
+  findSub: string = `Their is no subcategory for this category...`
+
+  load: boolean = false;
+  sideMessage: string = '';
+  showSideError(message: string) {
+    this.sideMessage = message
+    $(".sideAlert").css({ "right": "0%" })
+    setTimeout(() => {
+      $(".sideAlert").css({ "right": "-200%" })
+    }, 3000);
+  }
+  onSearch() {
+    if (this.textSearch) {
+      console.log(this.categoryList);
+      console.log(this.textSearch);
+
+      this.categoryList = this.originalCategoryList.filter(ele => {
+        return ele.nameEn.toLowerCase().includes(this.textSearch.toLowerCase())
+      });
+      if (!this.categoryList.length) {
+        this.findSub = `No matching result`
+      }
+
+    } else {
+      this.categoryList = this.originalCategoryList
+    }
+
+  }
   constructor(private _CategoryService: CategoryService, private _Router: Router, private _ActivatedRoute: ActivatedRoute) {
     this.getSubCategoriesById(this._ActivatedRoute.snapshot.paramMap.get('id')!)
     this.getCategoryById(this._ActivatedRoute.snapshot.paramMap.get('id')!)
@@ -29,8 +59,10 @@ export class CategoryDetailsComponent {
 
     })
   }
+  
   getSubCategoriesById(id: any) {
     return this._CategoryService.getListOfSubCategoriesById(id).subscribe(res => {
+      this.originalCategoryList = res
       this.categoryList = res
       console.log({ res });
 
@@ -50,17 +82,9 @@ export class CategoryDetailsComponent {
   }
 
 
-  changeOrderStatus(btn: string, status: string) {
-    $(`.${btn}`).text(status)
-    $(`.dropdown-menu-list`).slideUp(300)
-    $('.search_dropdownMenuButton').removeClass('search_dropdownMenuButton_click')
 
-    if (status == 'Category') {
-      this._Router.navigateByUrl("/admin/category/add")
-    } else {
-      this._Router.navigateByUrl("/admin/category/add/sub")
-    }
-
+  navigateToSubCategory() {
+    this._Router.navigateByUrl("/admin/category/add/sub")
   }
 
   getCategoryDetails(id: string) {
@@ -79,14 +103,14 @@ export class CategoryDetailsComponent {
   }
 
   deleteCategory(id: any) {
+    this.load = true
     this._CategoryService.deleteCategoryById(id).subscribe(res => {
-      console.log({ res });
-      if (res) {
-        this._Router.navigateByUrl("/admin/category")
-      }
-    }, err => {
-      console.log({ err });
+      this.load = false
+      this._Router.navigateByUrl("/admin/category")
 
+    }, err => {
+      this.load = false;
+      this.showSideError(`Fail to delete`)
     })
   }
 }

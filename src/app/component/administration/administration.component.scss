@@ -30,9 +30,20 @@ $redColor: #D80008;
   border-radius: 25px;
   box-shadow: 5px 5px 20px 2px $lighterGrayColor;
   background-color: $whiteColor;
-  //
-  // max-height: 650px;
-  //
+  height: 570px;
+}
+
+.imageContainer {
+  position: absolute;
+  top: 0;
+  bottom: 80%;
+  width: 100%;
+  right: 0;
+  vertical-align: middle;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  // background-color: red;
 }
 
 .imageContainer img {
@@ -42,22 +53,30 @@ $redColor: #D80008;
 }
 
 .contentList {
+  position: absolute;
+  top: 20%;
+  bottom: 10%;
+  right: 0%;
+  left: 0%;
+  overflow-y: scroll;
   border-top: 1px solid $middleGrayColor;
   border-bottom: 1px solid $middleGrayColor;
-  //
-  // max-height: 450px;
-  // overflow-y: scroll;
-  //
+
 }
 
 
 .contentList ul li {
-  font-size: 14px;
+  font-size: .8em;
   cursor: pointer;
 }
 
+.listItem {
+  display: flex;
+  align-items: center;
+}
+
 .listItem .fa-circle {
-  font-size: 8px;
+  font-size: .5em;
   display: none;
 }
 
@@ -68,26 +87,20 @@ $redColor: #D80008;
 
 .ActiveCheck {
   background-color: $blackColor;
-  font-size: 14px;
+  font-size: 0.8em;
   border-radius: 15px;
   color: $whiteColor;
+  width: 90%;
 }
 
 .sideNav_footer {
-  // border-top: 1px solid $$middleGrayColor;
-  // position: absolute;
-  // vertical-align: middle;
-  // bottom: 1%;
-  // left: 0%;
-  // right: 0%;
-  // position: absolute;
-  // width: 100%;
-  // bottom: 0%;
+  position: absolute;
+  bottom: 0%;
+  left: 0%;
+  right: 0%;
   padding: 15px 5px;
   text-align: center;
   color: $redColor ;
-  // background-color: black;
-  // border-top: 1px solid $middleGrayColor;
   background-color: $whiteColor;
 
 }
@@ -96,7 +109,6 @@ $redColor: #D80008;
 
 // Start RightPart Head Section
 .profileAndLang {
-
   background-color: $lightGray;
   border-radius: 15px;
   position: relative;
@@ -104,12 +116,13 @@ $redColor: #D80008;
 
 .container_profile_Image {
   position: relative;
+  // text-align: center;
 }
 
 .container_profile_Image .fa-circle {
   position: absolute;
-  left: 0%;
-  bottom: 2%;
+  left: 4%;
+  bottom: 4%;
   z-index: 111;
 }
 
@@ -126,7 +139,6 @@ $redColor: #D80008;
 
 .changeLang {
   border-left: 2px solid $lighterGrayColor;
-
 }
 
 .changeLang div {
@@ -154,10 +166,21 @@ $redColor: #D80008;
 
 
 // Nested component
-.componentSection {
-  display: none;
-}
+// .componentSection {
+//   display: none;
+// }
 
-.order {
-  display: block;
+// .order {
+//   display: block;
+// }
+
+
+// Right part header media
+@media only screen and (max-width: 950px) {
+  .profileAndLang h5 {
+    font-size: 1.2rem;
+  }
+  .profileAndLang p {
+    font-size: .8rem;
+  }
 }

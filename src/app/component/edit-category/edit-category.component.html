@@ -1,4 +1,13 @@
 <div class="head">
+  <div class="sideAlert">
+    {{sideMessage}}
+  </div>
+  <div class="overLay" *ngIf="load">
+    <div class="d-flex w-100 h-100 justify-content-center align-items-center">
+      <i class="fa fa-spinner fa-5x fa-spin text-light"></i>
+    </div>
+  </div>
+
   <div class="row">
     <div class="col-lg-4 col-md-5 col-12">
       <h4 class="head_title">Category Management</h4>
@@ -150,8 +159,8 @@
             </div>
           </div>
 
-      
-  </form>
+
+        </form>
       </div>
     </div>
   </div>

@@ -11,12 +11,16 @@ declare let $: any;
   styleUrls: ['./product.component.scss']
 })
 export class ProductComponent implements OnInit {
+  load: boolean = false;
+  sideMessage: string = '';
   selectedStatus: any = null
   fullProductList: any = []
   copyProductList: any = []
   categoryList: any = []
+  subcategoryList: any = []
   brandList: any = []
   selectedCategory!: any
+  selectedSubcategory!: any
   textSearch: string = ''
   selectedBrand!: any
   productList: any = []
@@ -27,7 +31,7 @@ export class ProductComponent implements OnInit {
   userInfo: any;
   status = [
     {
-      isActive: "all status"
+      isActive: "Status"
     },
     {
       isActive: "available"
@@ -37,6 +41,13 @@ export class ProductComponent implements OnInit {
     }
   ]
 
+  showSideError(message: string) {
+    this.sideMessage = message
+    $(".sideAlert").css({ "right": "0%" })
+    setTimeout(() => {
+      $(".sideAlert").css({ "right": "-200%" })
+    }, 3000);
+  }
   constructor(private _Router: Router,
     private _ProductService: ProductService,
     private _CategoryService: CategoryService,
@@ -57,10 +68,10 @@ export class ProductComponent implements OnInit {
     return this._CategoryService.categoryList().subscribe(res => {
       this.categoryList = res;
       this.categoryList.unshift({
-        nameEn: "all categories"
+        nameEn: "Category"
       })
     }, err => {
-      console.log({ err });
+      this.showSideError(`Fail to load category list please reload`)
 
     }
     )
@@ -70,15 +81,15 @@ export class ProductComponent implements OnInit {
       console.log({ res });
       this.brandList = res;
       this.brandList.unshift({
-        nameEn: "all brands"
+        nameEn: "Brands"
       })
     }, err => {
-      console.log({ err });
-
+      this.showSideError(`Fail to load brand list please reload`)
     }
     )
   }
   getAllProducts() {
+    this.load = true;
     if (this.userInfo.isUser) {
       "06eff051-2254-4eb7-d4fc-08dbbb387eb9"
       // this.userInfo.id
@@ -89,23 +100,23 @@ export class ProductComponent implements OnInit {
 
         this.fullProductList = res;
         this.productList = this.fullProductList.slice(0, this.pageSize);
+        this.load = false
       }, err => {
-        console.log({ err });
-      }
-      )
+        this.load = false
+        this.showSideError(`Fail to load product list.`);
+      })
     } else {
       return this._ProductService.getProductsList().subscribe(res => {
-        console.log({ res });
         this.pages = Math.ceil(res.length / this.pageSize);
         this.fullProductList = res;
         this.productList = this.fullProductList.slice(0, this.pageSize);
+        this.load = false;
       }, err => {
-        console.log({ err });
-
+        this.load = false;
+        this.showSideError(`Fail to load product list.`);
       }
       )
     }
-
   }
 
 
@@ -202,12 +213,14 @@ export class ProductComponent implements OnInit {
     this._Router.navigateByUrl(`admin/product/${id}/update`)
   }
   deleteProduct(id: string) {
+    this.load= true;
     this._ProductService.deleteProductById(id).subscribe(res => {
-      console.log({ res });
+      this.load= false;
       this.currentPage = 1;
       return this.getAllProducts()
     }, err => {
-      alert("Some thing went wrong")
+      this.load= false;
+      this.showSideError(`Fail to delete this product.`);
     })
   }
   addProduct() {
@@ -226,7 +239,26 @@ export class ProductComponent implements OnInit {
       this.getAllProducts()
     }
   }
+  FilterBySubcategory() {
+
+    let categoryId = this.selectedSubcategory?.id
+    if (categoryId) {
+      this.getByCategoryId(categoryId)
+    } else {
+      this.getAllProducts()
+    }
+  }
+
   getAllProductsByCategoryId(id: string) {
+    this._CategoryService.getListOfSubCategoriesById(id).subscribe(res => {
+      this.subcategoryList = res
+    }, err => {
+      console.log({ err });
+    })
+    return this.getByCategoryId(id);
+  }
+
+  getByCategoryId(id: string) {
     return this._ProductService.getByCategory(id).subscribe(res => {
 
       this.pages = Math.ceil(res.length / this.pageSize);
@@ -240,6 +272,7 @@ export class ProductComponent implements OnInit {
 
     })
   }
+
   FilterByBrand() {
     let BrandId = this.selectedBrand?.id
     if (BrandId) {

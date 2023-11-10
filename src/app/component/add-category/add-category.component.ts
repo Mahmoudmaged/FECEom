@@ -10,6 +10,15 @@ declare let $: any;
   styleUrls: ['./add-category.component.scss']
 })
 export class AddCategoryComponent {
+  load: boolean = false;
+  sideMessage: string = '';
+  showSideError(message: string) {
+    this.sideMessage = message
+    $(".sideAlert").css({ "right": "0%" })
+    setTimeout(() => {
+      $(".sideAlert").css({ "right": "-200%" })
+    }, 3000);
+  }
   selectedValues: string[] = [];
   categoryList: any = []
   brandList: any = []
@@ -22,7 +31,6 @@ export class AddCategoryComponent {
   constructor(private _CategoryService: CategoryService,
     private _AttachmentsService: AttachmentsService,
     private _Router: Router) {
-
   }
 
   selectImage(event: any) {
@@ -37,7 +45,7 @@ export class AddCategoryComponent {
       console.log({ fileName: event.target.files[0].name, file: this.selectedImage.split("base64,")[1] });
 
       return this._AttachmentsService.uploadAttachBase64({
-        fileName: event.target.files[0].name, file:  this.selectedImage.split("base64,")[1]
+        fileName: event.target.files[0].name, file: this.selectedImage.split("base64,")[1]
       }).subscribe(res => {
         this.image = res
         console.log({ res });
@@ -71,8 +79,10 @@ export class AddCategoryComponent {
 
   handelAddCategory() {
 
+    this.load = true;
     if (!this.image) {
-      this.errorMessage = "Image is required"
+      this.load = false;
+      this.showSideError("Image is required");
     }
 
     let data = {
@@ -85,16 +95,15 @@ export class AddCategoryComponent {
       mainCategoryId: "",
     }
 
-    console.log({ data });
 
     this._CategoryService.addCategory(data).subscribe(res => {
-      console.log({ res });
+      this.load = false;
       this._Router.navigateByUrl("/admin/category")
 
     },
       err => {
-        console.log({ err });
-
+        this.load = false;
+        this.showSideError("Fail to create p;ease try again")
       }
     )
   }

@@ -11,7 +11,15 @@ declare let $: any;
   styleUrls: ['./add-subcategory.component.scss']
 })
 export class AddSubcategoryComponent implements OnInit {
-
+  load: boolean = false;
+  sideMessage: string = '';
+  showSideError(message: string) {
+    this.sideMessage = message
+    $(".sideAlert").css({ "right": "0%" })
+    setTimeout(() => {
+      $(".sideAlert").css({ "right": "-200%" })
+    }, 3000);
+  }
   selectedValues: string[] = [];
   categoryList: any = []
   brandList: any = []
@@ -25,7 +33,7 @@ export class AddSubcategoryComponent implements OnInit {
     private _CategoryService: CategoryService,
     private _AttachmentsService: AttachmentsService,
     private _Router: Router) {
-      this.getAllCategory()
+    this.getAllCategory()
   }
 
   selectImage(event: any) {
@@ -79,9 +87,10 @@ export class AddSubcategoryComponent implements OnInit {
   })
 
   handelAddCategory() {
-
+    this.load = true;
     if (!this.image) {
-      this.errorMessage = "Image is required"
+      this.load = false;
+      this.showSideError("Image is required");
     }
 
     let data = {
@@ -97,12 +106,12 @@ export class AddSubcategoryComponent implements OnInit {
     console.log({ data });
 
     this._CategoryService.addCategory(data).subscribe(res => {
-      console.log({ res });
+      this.load = false
       this._Router.navigateByUrl("/admin/category")
     },
       err => {
-        console.log({ err });
-
+        this.load = false
+        this.showSideError(`Fail to create please try again later`)
       }
     )
   }

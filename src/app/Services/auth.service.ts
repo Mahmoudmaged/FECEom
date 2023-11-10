@@ -18,6 +18,10 @@ export class AuthService {
     return this._HttpClient.post(`${this.baseURL}LoginAdmin?userName=${data.email}&password=${data.password}`, {});
   }
 
+  forgetEmail(data: any): Observable<any> {
+    return this._HttpClient.post(`${this.baseURL}ForgetPassword?userName=${data.email}`, {});
+  }
+
   isLoggedIn() {
     return !!localStorage.getItem('token');
   }

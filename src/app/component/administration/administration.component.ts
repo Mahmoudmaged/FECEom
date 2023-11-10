@@ -25,10 +25,10 @@ export class AdministrationComponent implements OnInit {
 
   changeDisplay(item: string, component: string): any {
     //hide all
-    $(`.listItem`).children("span").removeClass("ActiveCheck")
+    $(`.listItem`).children("p").removeClass("ActiveCheck")
     $(`.listItem`).children("i").hide();
     //Display 
-    $(`.${item}`).children("span").addClass("ActiveCheck")
+    $(`.${item}`).children("p").addClass("ActiveCheck")
     $(`.${item}`).children("i").show()
 
     this._Router.navigateByUrl(`/admin/${component}`) // thanks to lazyLoading with nesting routing

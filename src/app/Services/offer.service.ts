@@ -19,7 +19,24 @@ export class OfferService {
     return this._HttpClient.get(`${this.baseURL}GetAll`);
   }
 
+
+  getOfferById(id: string): Observable<any> {
+    return this._HttpClient.get(`${this.baseURL}GetById?id=${id}`);
+  }
+
   addOffer(data: any): Observable<any> {
     return this._HttpClient.post(`${this.baseURL}Add`, data);
+  }
+
+  updateOffer(data: any): Observable<any> {
+    return this._HttpClient.post(`${this.baseURL}Update`, data);
+  }
+
+  deleteOfferById(id: string): Observable<any> {
+    return this._HttpClient.post(`${this.baseURL}Delete?id=${id}`, {});
+  }
+
+  deleteProductFromOfferById(id: string): Observable<any> {
+    return this._HttpClient.post(`${this.baseURL}RemoveProductFromOffer?id=${id}`, {});
   }
 }

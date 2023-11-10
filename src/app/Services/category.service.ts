@@ -18,6 +18,10 @@ export class CategoryService {
     return this._HttpClient.get(`${this.baseURL}GetAllMainCategory`);
   }
 
+  Search(text: any): Observable<any> {
+    return this._HttpClient.get(`${this.baseURL}GetAllMainCategory`);
+  }
+
   getListOfSubCategoriesById(id: any): Observable<any> {
     return this._HttpClient.get(`${this.baseURL}GetAllSubById?catId=${id}`)
   }

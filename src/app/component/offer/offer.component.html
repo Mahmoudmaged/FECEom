@@ -1,4 +1,14 @@
 <div class="head">
+  <div class="sideAlert">
+    {{sideMessage}}
+  </div>
+  <div class="overLay" *ngIf="load">
+    <div class="d-flex w-100 h-100 justify-content-center align-items-center">
+      <i class="fa fa-spinner fa-5x fa-spin text-light"></i>
+    </div>
+  </div>
+
+
   <div class="row">
     <div class="col-lg-3  col-md-5 col-12">
       <h4 class="head_title">Offers</h4>
@@ -8,7 +18,8 @@
       <div class="row ">
         <div class="col-md-8 col-8">
           <div class="searchInputContainer">
-            <input type="text" placeholder="Search results " class="w-100 searchInput">
+            <input type="text" placeholder="Search results" [(ngModel)]="textSearch" class="w-100 searchInput"
+              (input)="onSearch()">
             <i class="fa fa-search"></i>
           </div>
         </div>
@@ -59,13 +70,14 @@
             <td>{{offer.descriptionEn}}</td>
             <td>{{offer.percent}} %</td>
             <td>
-              {{offer.startDate.split(' ')[0]}}
+              {{offer.startDate|date}}
             </td>
 
             <td class="optionsActions">
-              <span class="p-1"> <i class="fa fa-edit"></i></span>
-              <span class="p-1"> <i class="fa fa-trash"></i></span>
-              <span class="p-1"> <i class="fa fa-ellipsis-v" aria-hidden="true"></i></span>
+              <span class="p-1"> <i class="fa fa-edit" (click)="editOffer(offer.id)"></i></span>
+              <span class="p-1"> <i class="fa fa-trash" (click)="deleteOffer(offer.id)"></i></span>
+              <span class="p-1"> <i class="fa fa-ellipsis-v" aria-hidden="true"
+                  (click)="showOfferDetails(offer.id)"></i></span>
 
             </td>
 

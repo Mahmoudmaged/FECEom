@@ -22,6 +22,8 @@ import { EditCategoryComponent } from '../../edit-category/edit-category.compone
 import { EditSubcategoryComponent } from '../../edit-subcategory/edit-subcategory.component';
 import { OfferComponent } from '../../offer/offer.component';
 import { AddOfferComponent } from '../../add-offer/add-offer.component';
+import { EditOfferComponent } from '../../edit-offer/edit-offer.component';
+import { OfferDetailsComponent } from '../../offer-details/offer-details.component';
 
 const routes: Routes = [
   { path: 'financial', component: FinancialManagementComponent },
@@ -45,6 +47,8 @@ const routes: Routes = [
   { path: "category/add/sub", component: AddSubcategoryComponent },
   { path: "offers", component: OfferComponent },
   { path: "offers/add", component: AddOfferComponent },
+  { path: "offer/:id/edit", component: EditOfferComponent },
+  { path: "offer/:id/details", component: OfferDetailsComponent },
   { path: "**", component: NotAvailableComponent },
 
 ];

@@ -1,16 +1,16 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AttachmentsService } from 'src/app/Services/attachments.service';
 import { CategoryService } from 'src/app/Services/category.service';
 import { OfferService } from 'src/app/Services/offer.service';
 declare let $: any;
 @Component({
-  selector: 'app-add-offer',
-  templateUrl: './add-offer.component.html',
-  styleUrls: ['./add-offer.component.scss']
+  selector: 'app-edit-offer',
+  templateUrl: './edit-offer.component.html',
+  styleUrls: ['./edit-offer.component.scss']
 })
-export class AddOfferComponent {
+export class EditOfferComponent implements OnInit {
   selectedValues: string[] = [];
   offerList: any = []
   base: any;
@@ -21,6 +21,7 @@ export class AddOfferComponent {
   categoryList: any = [];
   load: boolean = false;
   sideMessage: string = '';
+  offer: any;
   showSideError(message: string) {
     this.sideMessage = message
     $(".sideAlert").css({ "right": "0%" })
@@ -28,10 +29,17 @@ export class AddOfferComponent {
       $(".sideAlert").css({ "right": "-200%" })
     }, 3000);
   }
-  
   constructor(
-    private _CategoryService: CategoryService, private _AttachmentsService: AttachmentsService, private _OfferService: OfferService, private _Router: Router) {
+    private _ActivatedRoute: ActivatedRoute,
+    private _CategoryService: CategoryService,
+    private _AttachmentsService: AttachmentsService,
+    private _OfferService: OfferService,
+    private _Router: Router) {
     this.getAllCategory()
+  }
+
+  ngOnInit(): void {
+    this.getOffer(this._ActivatedRoute.snapshot.paramMap.get('id')!)
   }
 
   getAllCategory() {
@@ -42,8 +50,33 @@ export class AddOfferComponent {
     })
   }
 
+  getOffer(id: string) {
+    this.load = true;
+    return this._OfferService.getOfferById(id).subscribe(res => {
+      this.offer = res;
+      this.addOfferForm.controls.code.setValue(this.offer.code)
+      this.addOfferForm.controls.title.setValue(this.offer.title)
+      this.addOfferForm.controls.titleEn.setValue(this.offer.titleEn)
+      this.addOfferForm.controls.description.setValue(this.offer.description)
+      this.addOfferForm.controls.descriptionEn.setValue(this.offer.descriptionEn)
+      this.addOfferForm.controls.percent.setValue(this.offer.percent)
+      this.addOfferForm.controls.offerType.setValue(this.offer.offerType)
+      this.addOfferForm.controls.startDate.setValue(this.offer.startDate)
+      this.addOfferForm.controls.endDate.setValue(this.offer.endDate)
+      this.addOfferForm.controls.isActive.setValue(this.offer.isActive)
+      setTimeout(() => {
+        this.addOfferForm.controls.offerCategoryId.setValue(this.offer.offerCategoryId)
+      }, 1000);
+      this.load = false;
+    }, err => {
+      this.load = false;
+      this.showSideError("Fail to load product category list ")
+    })
+  }
+
   addOfferForm = new FormGroup({
-    photoId: new FormControl('', [Validators.required]),
+    id: new FormControl('', []),
+    photoId: new FormControl('', []),
     code: new FormControl('', [Validators.required]),
     title: new FormControl('', [Validators.required]),
     titleEn: new FormControl('', [Validators.required]),
@@ -57,23 +90,23 @@ export class AddOfferComponent {
     offerCategoryId: new FormControl('', [Validators.required]),
   })
 
-  handelAddOffer() {
+  handelUpdateOffer() {
     this.load = true;
-    if (!this.image) {
-      this.errorMessage = "Image is required"
-    }
     let data = this.addOfferForm.value
-    data.photoId = this.image
+    data.id = this.offer.id
+    data.photoId = this.image ? this.image : this.offer.photoId
 
-    this._OfferService.addOffer(data).subscribe((res) => {
+
+    this._OfferService.updateOffer(data).subscribe((res) => {
       this.load = false
       this._Router.navigateByUrl("/admin/offers")
     }, err => {
       this.load = false;
-      this.showSideError('Fail to add please try again')
+      console.log({ err });
+
+      this.showSideError('Fail to update please try again')
     })
   }
-
 
   selectImage(event: any) {
     this.load = true;
@@ -89,16 +122,16 @@ export class AddOfferComponent {
         fileName: event.target.files[0].name, file: this.selectedImage.split("base64,")[1]
       }).subscribe(res => {
         this.load = false;
-
         this.image = res
       }, err => {
         this.load = false;
-        this.showSideError('Fail to upload ');
+        this.showSideError('Fail to upload offer image please try again')
       }
       )
 
     };
     reader.readAsDataURL(file);
+
   }
 
   close() {

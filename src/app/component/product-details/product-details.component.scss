@@ -1,4 +1,27 @@
 @import '../order-management/order-management.component.scss';
+.overLay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, .7);
+    z-index: 5555555555555555;
+}
+
+.sideAlert {
+    background-color: $redColor;
+    color: $whiteColor;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    position: fixed;
+    right: -100%;
+    top: 15%;
+    padding: 10px 20px;
+    transition: all 1s;
+    z-index: 9999999999999;
+}
+
 .AvailabilityOption{
     display: flex;
 }
@@ -8,6 +31,10 @@
 .orderDetailsImage{
     border: 0px;
 }
+.productImage{
+    max-width: 150px;
+}
+
 // .orderDetailsImage img{
 //     width: 150px;
 //     padding: 5px;
@@ -18,4 +45,13 @@
 }
 .unavailable input{
     accent-color: $redColor;
+}
+.btn-dark{
+    background-color: $blackColor !important;
+}
+.btn-dark:hover{
+    // background-color: $blackColor !important;
+    background-color: $whiteColor !important;
+    border-color: 1px $blackColor;
+    color: $blackColor;
 }

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/Services/auth.service';
+import { CookieService } from 'ngx-cookie-service';
 declare let $: any;
 @Component({
   selector: 'app-admin-login',
@@ -12,17 +13,25 @@ export class AdminLoginComponent {
 
   errorMessage: boolean = false;
   emailGlobal: String = ''
+  load: boolean = false;
   message: String = '';
   loginError: boolean = false;
   loginErrorMessage: any;
-  load: boolean = false;
   load2: boolean = false;
+  sideMessage: string = '';
   decoded: any;
-  constructor(private _AuthService: AuthService, public _Router: Router) {
 
-    $("#SuperAdmin").show()
-    $(".nav-signUp").show()
-    $(".nav-login , .nav-link , .nav-logout").hide()
+
+  showSideError(message: string) {
+    this.sideMessage = message
+    $(".sideAlert").css({ "right": "0%" })
+    setTimeout(() => {
+      $(".sideAlert").css({ "right": "-200%" })
+    }, 3000);
+  }
+  constructor(
+    private _CookieService: CookieService,
+    private _AuthService: AuthService, public _Router: Router) {
     localStorage.clear();
   }
 
@@ -30,6 +39,11 @@ export class AdminLoginComponent {
 
   ngOnInit(): void {
 
+    if (this._CookieService.get('loginCredential').length) {
+      $('#rememberBox').prop('checked', true);
+      this.loginForm.controls.email.setValue(JSON.parse(this._CookieService.get('loginCredential')).email);
+      this.loginForm.controls.password.setValue(JSON.parse(this._CookieService.get('loginCredential')).password);
+    }
   }
   showPassword(action: string, id: string) {
 
@@ -52,6 +66,10 @@ export class AdminLoginComponent {
     password: new FormControl('', [Validators.required]),
   })
 
+  forgetEmail = new FormGroup({
+    email: new FormControl('', [Validators.email, Validators.required])
+  })
+
   forgetCode = new FormGroup({
     code: new FormControl('', [Validators.required])
   })
@@ -62,7 +80,7 @@ export class AdminLoginComponent {
   })
   handelSignIn() {
     this.load = true;
-    console.log({ rem: $(".checkBoxInput").is(":checked") });
+    // console.log({ rem: $(".checkBoxInput").is(":checked") });
 
     let Data = {
       email: this.loginForm.controls.email.value,
@@ -74,30 +92,54 @@ export class AdminLoginComponent {
       //set token localStorage
       localStorage.setItem('token', res.token);
       localStorage.setItem('user', JSON.stringify(res.user));
+      if ($(".checkBoxInput").is(":checked")) {
+        // Set a cookie that expires in 30*12 days (1Year)
+        this._CookieService.set('loginCredential', JSON.stringify(Data), 30 * 12);
+
+      }
       //redirect homePage
       this._Router.navigateByUrl("/admin")
       //Navigate DashBored
       this.loginForm.reset();
-
     },
       err => {
         this.load = false;
         this.loginError = true;
-        const { message } = err.error
-        console.log(message);
-        if (message == 'Validation error') {
-          this.loginErrorMessage = "In-valid data please enter valid data";
-        } else if (message == "Email not Exist") {
-          this.loginErrorMessage = "This user is not registered please signUp first";
-        } else if (message == "Email not confirmed yet") {
-          this.loginErrorMessage = "Please confirm your email";
-        } else if (message == "In-valid Password") {
-          this.loginErrorMessage = "Please enter the correct password";
-        } else {
-          // this.loginErrorMessage = `${message}`;
-          this.loginErrorMessage = `In-valid login data`;
+        const { message } = err.error;
+        this.showSideError(`In-valid Email Or Password`)
 
-        }
+        // if (message == 'Validation error') {
+        //   this.loginErrorMessage = "In-valid data please enter valid data";
+        // } else if (message == "Email not Exist") {
+        //   this.loginErrorMessage = "This user is not registered please signUp first";
+        // } else if (message == "Email not confirmed yet") {
+        //   this.loginErrorMessage = "Please confirm your email";
+        // } else if (message == "In-valid Password") {
+        //   this.loginErrorMessage = "Please enter the correct password";
+        // } else {
+        //   // this.loginErrorMessage = `${message}`;
+        //   this.showSideError(`In-valid Email Or Password`)
+
+        // }
+      }
+    )
+  }
+
+  handelForgetEmail() {
+    this.load = true;
+
+    let data = {
+      email: this.forgetEmail.controls.email.value,
+    }
+    this._AuthService.forgetEmail(data).subscribe(res => {
+      this.load = false;
+      this.showSection('forgetCode')
+    },
+      err => {
+        this.load = false;
+        console.log({ err: err });
+
+        this.showSideError(err?.error?.message || 'something went wrong')
       }
     )
   }
@@ -106,7 +148,7 @@ export class AdminLoginComponent {
     this.load = true;
 
     let Data = {
-      email: this.loginForm.controls.email.value,
+      userName: this.loginForm.controls.email.value,
       code: this.forgetCode.controls.code.value,
     }
     this._AuthService.signIn(Data).subscribe(res => {
@@ -179,4 +221,20 @@ export class AdminLoginComponent {
       }
     )
   }
+
+
+  showSection(sec: string) {
+    $(".loginSections").not(`.${sec}`).hide(200);
+    $(`.${sec}`).show(300);
+
+    switch (sec) {
+      case 'forgetEmail':
+        this.forgetEmail.controls.email.setValue(this.loginForm.controls.email.value)
+        break;
+      default:
+        break;
+    }
+
+  }
 }
+

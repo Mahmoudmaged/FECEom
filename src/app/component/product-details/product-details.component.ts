@@ -9,13 +9,22 @@ declare let $: any;
   styleUrls: ['./product-details.component.scss']
 })
 export class ProductDetailsComponent implements OnInit {
-
+  load: boolean = false;
+  sideMessage: string = '';
   product: any;
   pages: number = 20;
   pageSize = 8
   currentPage = 1
   photo: string = `../../../assets/images/avatar/ava.png`
   userInfo: any;
+
+  showSideError(message: string) {
+    this.sideMessage = message
+    $(".sideAlert").css({ "right": "0%" })
+    setTimeout(() => {
+      $(".sideAlert").css({ "right": "-200%" })
+    }, 3000);
+  }
   constructor(private _Router: Router, private _ProductService: ProductService, public _ActivatedRoute: ActivatedRoute) {
     this.userInfo = JSON.parse(localStorage.getItem('user')!);
 
@@ -30,16 +39,18 @@ export class ProductDetailsComponent implements OnInit {
   }
 
   getProduct(orderId: any) {
+    this.load = true;
     return this._ProductService.getProductById(orderId).subscribe(res => {
-      console.log({ res });
-      this.product = res
+      this.product = res;
+      this.load = false;
     }, err => {
-      console.log({ err });
+      this.load = false;
+      this.showSideError(`In-valid product Id`);
     }
     )
   }
 
-  
+
   closeProductDetailsSec() {
     this._Router.navigateByUrl(`admin/product`)
 

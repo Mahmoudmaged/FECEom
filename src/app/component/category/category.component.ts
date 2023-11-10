@@ -8,9 +8,17 @@ declare let $: any;
   styleUrls: ['./category.component.scss']
 })
 export class CategoryComponent implements OnInit {
+  load: boolean = false;
+  sideMessage: string = '';
+  categoryList: any[] = []
 
-  categoryList: any = []
-
+  showSideError(message: string) {
+    this.sideMessage = message
+    $(".sideAlert").css({ "right": "0%" })
+    setTimeout(() => {
+      $(".sideAlert").css({ "right": "-200%" })
+    }, 3000);
+  }
   constructor(private _CategoryService: CategoryService, private _Router: Router) {
     this.getCategoryList()
   }
@@ -20,16 +28,32 @@ export class CategoryComponent implements OnInit {
   }
 
   getCategoryList() {
+    this.load = true
     return this._CategoryService.categoryList().subscribe(res => {
       this.categoryList = res
-      console.log({ res });
-
+      this.load = false;
     }, err => {
-      console.log({ err });
-
+      this.load = false;
+      this.showSideError(`Fail to load category list`)
     })
   }
 
+  textSearch: string = ''
+
+  onSearch() {
+    if (this.textSearch) {
+      console.log(this.categoryList);
+      console.log(this.textSearch);
+
+      this.categoryList = this.categoryList.filter(ele => {
+        return ele.nameEn.toLowerCase().includes(this.textSearch.toLowerCase())
+      });
+
+    } else {
+      this.getCategoryList()
+    }
+
+  }
   showDropDown(classSelector: string, dropdownSelector: string) {
     //remover from siblings
     $(`.dropdown-menu-list`).not(`.${dropdownSelector}`).slideUp(300)
@@ -53,7 +77,7 @@ export class CategoryComponent implements OnInit {
 
   }
 
-  getCategoryDetails(id:string){
+  getCategoryDetails(id: string) {
     this._Router.navigateByUrl(`/admin/category/${id}/details`)
   }
 

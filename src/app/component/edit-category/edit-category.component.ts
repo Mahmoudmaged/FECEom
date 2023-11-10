@@ -10,6 +10,8 @@ declare let $: any;
   styleUrls: ['./edit-category.component.scss']
 })
 export class EditCategoryComponent {
+
+
   selectedValues: string[] = [];
   categoryList: any = []
   brandList: any = []
@@ -20,6 +22,15 @@ export class EditCategoryComponent {
 
   userInfo: any;
   selectedImage: string = '';
+  load: boolean = false;
+  sideMessage: string = '';
+  showSideError(message: string) {
+    this.sideMessage = message
+    $(".sideAlert").css({ "right": "0%" })
+    setTimeout(() => {
+      $(".sideAlert").css({ "right": "-200%" })
+    }, 3000);
+  }
   constructor(private _CategoryService: CategoryService,
     private _AttachmentsService: AttachmentsService,
     private _Router: Router,
@@ -63,17 +74,18 @@ export class EditCategoryComponent {
 
   }
   getCategoryById(id: any) {
+    this.load = true;
     return this._CategoryService.getCategoryWithId(id).subscribe(res => {
       this.category = res
       this.addCategoryForm.controls.categoryName.setValue(this.category.name)
       this.addCategoryForm.controls.categoryNameEn.setValue(this.category.nameEn)
       this.addCategoryForm.controls.categoryDescription.setValue(this.category.description)
       this.addCategoryForm.controls.categoryDescriptionEn.setValue(this.category.descriptionEn)
-      console.log({ res });
+      this.load = false
 
     }, err => {
-      console.log({ err });
-
+      this.load = false
+      this.showSideError('Fail to get category detail');
     })
   }
   addCategoryForm = new FormGroup({
@@ -85,6 +97,7 @@ export class EditCategoryComponent {
   })
 
   handelAddCategory() {
+    this.load = true;
     let data = {
       id: this.category.id,
       name: this.addCategoryForm.controls.categoryName.value,
@@ -96,19 +109,20 @@ export class EditCategoryComponent {
       mainCategoryId: "",
     }
 
-    console.log({ data });
 
     this._CategoryService.updateCategory(data).subscribe(res => {
-      console.log({ res });
+      this.load = false;
       this._Router.navigateByUrl("/admin/category")
 
     },
       err => {
-        console.log({ err });
-
+        this.load = false;
+        this.showSideError(`Fail to edit please check and try again`)
       }
     )
   }
+
+  
 
   showDropDown(classSelector: string, dropdownSelector: string) {
     //remover from siblings

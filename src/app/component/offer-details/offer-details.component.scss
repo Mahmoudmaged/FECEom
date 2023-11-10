@@ -1,0 +1,17 @@
+@import '../product-details/product-details.component.scss';
+.offerhead{
+    color: $redColor;
+}
+.offerProductList{
+    background-color: $lightGray;
+    border-radius: 15px;
+}
+.offerProductList img{
+    border-radius: 15px;
+    cursor: pointer;
+}
+.icontainer{
+    background-color: $lightPink;
+    border-radius: 5px;
+    cursor: pointer;
+}

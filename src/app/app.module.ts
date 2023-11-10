@@ -33,9 +33,12 @@ import { AddSubcategoryComponent } from './component/add-subcategory/add-subcate
 import { EditSubcategoryComponent } from './component/edit-subcategory/edit-subcategory.component';
 import { SubcategoryComponent } from './component/subcategory/subcategory.component';
 import { CategoryDetailsComponent } from './component/category-details/category-details.component';
-import { DropdownModule } from 'primeng/dropdown';
+import { DropdownModule ,  } from 'primeng/dropdown';
+import { MultiSelectModule } from 'primeng/multiselect';
 import { OfferComponent } from './component/offer/offer.component';
 import { AddOfferComponent } from './component/add-offer/add-offer.component';
+import { EditOfferComponent } from './component/edit-offer/edit-offer.component';
+import { OfferDetailsComponent } from './component/offer-details/offer-details.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -64,7 +67,9 @@ import { AddOfferComponent } from './component/add-offer/add-offer.component';
     SubcategoryComponent,
     CategoryDetailsComponent,
     OfferComponent,
-    AddOfferComponent
+    AddOfferComponent,
+    EditOfferComponent,
+    OfferDetailsComponent
   ],
   imports: [
     BrowserModule,
@@ -75,7 +80,8 @@ import { AddOfferComponent } from './component/add-offer/add-offer.component';
     ReactiveFormsModule,
     HttpClientModule,
     NgApexchartsModule,
-    DropdownModule
+    DropdownModule,
+    MultiSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent]

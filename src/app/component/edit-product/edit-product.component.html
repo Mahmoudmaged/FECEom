@@ -1,4 +1,17 @@
 <section class="OrderDetailsSec  p-3">
+
+    
+    <div class="sideAlert">
+        {{sideMessage}}
+    </div>
+    <div class="overLay" *ngIf="load">
+        <div class="d-flex w-100 h-100 justify-content-center align-items-center">
+            <i class="fa fa-spinner fa-5x fa-spin text-light"></i>
+        </div>
+    </div>
+
+
+    
     <div class="text-end w-100">
         <i (click)="closeProductDetailsSec()" class="fa fa-times  ms-auto" aria-hidden="true"></i>
     </div>
@@ -29,7 +42,7 @@
                         <div>
                             <p>Product Name</p>
                             <div class="form-group">
-                                <input  type="text" formControlName="productName" class="form-control" />
+                                <input type="text" formControlName="productName" class="form-control" />
 
                                 <div *ngIf="addProductForm.controls['productName'].errors && addProductForm.controls['productName'].touched"
                                     class="text-center my-1 xx">
@@ -44,7 +57,7 @@
                         <div>
                             <p>Product NameEN</p>
                             <div class="form-group">
-                                <input type="text" formControlName="productNameEn" class="form-control"    />
+                                <input type="text" formControlName="productNameEn" class="form-control" />
 
                                 <div *ngIf="addProductForm.controls['productNameEn'].errors && addProductForm.controls['productNameEn'].touched"
                                     class="text-center my-1 xx">
@@ -147,27 +160,6 @@
                         </div>
                     </div>
                 </div>
-
-                <div class="col-md-6 my-2">
-                    <div class="p-2">
-                        <div>
-                            <p>Category</p>
-                            <div class="form-group my-1">
-                                <select formControlName="category" class="form-select p-2"
-                                    aria-label="Default select example">
-                                    <option *ngFor="let category of categoryList ;  index as i" [value]="category.id"
-                                        [selected]=" i== 0">
-                                        {{category.nameEn}}</option>
-                                </select>
-
-                                <div *ngIf="addProductForm.controls['category'].errors && addProductForm.controls['category'].touched"
-                                    class="text-center my-1 xx">
-                                    <p>In-valid category name</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
                 <div class="col-md-6 my-2">
                     <div class="p-2 ">
                         <div>
@@ -187,6 +179,47 @@
                         </div>
                     </div>
                 </div>
+                <div class="col-md-6 my-2">
+                    <div class="p-2">
+                        <div>
+                            <p>Category</p>
+                            <div class="form-group">
+                                <select (change)="getSubCategory('')" formControlName="category" class="form-select p-2"
+                                    aria-label="Default select example">
+                                    <option *ngFor="let category of categoryList ;  index as i" [value]="category.id"
+                                        [selected]=" i== 0">
+                                        {{category.nameEn}}</option>
+                                </select>
+
+                                <div *ngIf="addProductForm.controls['category'].errors && addProductForm.controls['category'].touched"
+                                    class="text-center my-1 xx">
+                                    <p>In-valid category name</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div  class="col-md-6 my-2">
+                    <div class="p-2">
+                        <div>
+                            <p>Subcategory</p>
+                            <div class="form-group">
+                                <select id="subcategory" formControlName="subcategory" class="form-select p-2"
+                                    aria-label="Default select example">
+                                    <option *ngFor="let subcategory of subcategoryList ;  index as i"
+                                        [value]="subcategory.id" [selected]=" i== 0">
+                                        {{subcategory.nameEn}}</option>
+                                </select>
+
+                                <div *ngIf="addProductForm.controls['subcategory'].errors && addProductForm.controls['subcategory'].touched"
+                                    class="text-center my-1 xx">
+                                    <p>In-valid subcategory </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
 
 
                 <div class="col-md-6 my-2">
@@ -194,15 +227,17 @@
                         <div>
                             <p>Product options</p>
 
-                            <select multiple [(ngModel)]="selectedValues" formControlName="productOptions"
+                            <!-- <select multiple [(ngModel)]="selectedValues" formControlName="productOptions"
                                 class="form-select " aria-label=".form-select-lg example">
                             
                                 <option *ngFor="let option of optionList ;  index as i" [value]="option.id"
                                 [selected]="i==0">
                                 {{option.nameEn }}</option>
-                            </select>
+                            </select> -->
 
 
+                            <p-multiSelect formControlName="productOptions" [options]="optionList" optionLabel="name"
+                                [style]="{'width':'100%'}"></p-multiSelect>
 
                         </div>
                     </div>
@@ -225,7 +260,7 @@
                     </div>
 
                 </div>
-                
+
                 <div class="col-12 my-2">
                     <div class="p-2">
                         <div>

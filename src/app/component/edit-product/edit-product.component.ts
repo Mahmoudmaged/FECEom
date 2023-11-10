@@ -12,10 +12,12 @@ declare let $: any;
   styleUrls: ['./edit-product.component.scss']
 })
 export class EditProductComponent implements OnInit {
-
+  load: boolean = false;
+  sideMessage: string = '';
   product: any;
   selectedValues: string[] = [];
   categoryList: any = []
+  subcategoryList: any = []
   brandList: any = []
   images: any = [];
   optionList: any = []
@@ -24,6 +26,13 @@ export class EditProductComponent implements OnInit {
   userInfo: any;
 
 
+  showSideError(message: string) {
+    this.sideMessage = message
+    $(".sideAlert").css({ "right": "0%" })
+    setTimeout(() => {
+      $(".sideAlert").css({ "right": "-200%" })
+    }, 3000);
+  }
   constructor(private _Router: Router,
     private _ProductService: ProductService,
     private _CategoryService: CategoryService,
@@ -34,9 +43,11 @@ export class EditProductComponent implements OnInit {
     this.userInfo = JSON.parse(localStorage.getItem('user')!);
     this.getAllCategory()
     this.getAllBrands()
-    this.getProductByID(this._ActivatedRoute.snapshot.paramMap.get('id')!)
     this.getAllOption()
-
+    this.getProductByID(this._ActivatedRoute.snapshot.paramMap.get('id')!)
+    setTimeout(() => {
+      this.addProductForm.controls.subcategory.setValue(this.product.categoryId)
+    }, 1000);
   }
 
 
@@ -80,35 +91,44 @@ export class EditProductComponent implements OnInit {
 
   getAllOption() {
     return this._ProductService.getOptionList().subscribe(res => {
-      console.log({ res });
       this.optionList = res;
+      console.log({ op: this.optionList });
+
     }, err => {
       console.log({ err });
+      this.showSideError('Fail to load product options');
 
-    }
-    )
+    })
   }
   getAllCategory() {
     return this._CategoryService.categoryList().subscribe(res => {
       console.log({ res });
       this.categoryList = res;
     }, err => {
-      console.log({ err });
+      this.showSideError('Fail to load product category list');
+
 
     }
     )
   }
   getAllBrands() {
     return this._BrandService.brandList().subscribe(res => {
-      console.log({ res });
       this.brandList = res;
     }, err => {
-      console.log({ err });
+      this.showSideError('Fail to load brand category list');
 
     }
     )
   }
 
+
+  getSubCategory(id: string) {
+    return this._CategoryService.getListOfSubCategoriesById(id || this.addProductForm.controls.category.value).subscribe(res => {
+      this.subcategoryList = res
+    }, err => {
+      this.showSideError('In-valid category Id');
+    })
+  }
   addProductForm = new FormGroup({
     image: new FormControl('', []),
     productName: new FormControl('', [Validators.required]),
@@ -125,15 +145,19 @@ export class EditProductComponent implements OnInit {
     noteForReturn: new FormControl('', []),
     // InventoryName: new FormControl('', [Validators.required]),
     category: new FormControl('', [Validators.required]),
+    subcategory: new FormControl('', [Validators.required]),
     brand: new FormControl('', [Validators.required]),
     available: new FormControl('available', [Validators.required]),
 
   })
 
   getProductByID(id: any) {
+    this.load = true
     return this._ProductService.getProductWithId(id).subscribe(res => {
-      console.log({ res });
+
       this.product = res
+      this.getSubCategory(this.product.category?.mainCategoryId);
+
       this.addProductForm.controls.productName.setValue(this.product.name)
       this.addProductForm.controls.productNameEn.setValue(this.product.nameEn)
       this.addProductForm.controls.productDescription.setValue(this.product.description)
@@ -143,23 +167,30 @@ export class EditProductComponent implements OnInit {
       this.addProductForm.controls.amount.setValue(this.product.amount)
       this.addProductForm.controls.productOptions.setValue(this.product.productOptions)
       this.addProductForm.controls.noteForReturn.setValue(this.product.noteForReturn)
-      this.addProductForm.controls.category.setValue(this.product.categoryId)
+      this.addProductForm.controls.category.setValue(this.product.category.mainCategoryId)
+      this.addProductForm.controls.subcategory.setValue(this.product.categoryId)
       this.addProductForm.controls.brand.setValue(this.product.brandId)
       this.addProductForm.controls.available.setValue(this.product.isActive ? 'available' : 'unavailable')
-
+      this.addProductForm.controls.productOptions.setValue(this.product.productOptions)
+      this.load = false
     }, err => {
-      console.log({ err });
+      this.load = false
+      this.showSideError(`Fail product doesn't exist`);
     }
     )
   }
 
 
   handelAddProduct() {
+    this.load = true;
     if (!this.imagesList.length) {
-      this.errorMessage = "Image is required"
+      this.showSideError(`Image is required`);
     }
 
-    let selectedOptions = []
+
+    let selectedOptions: any[] = []
+    console.log(this.addProductForm.controls.productOptions.value);
+    
     if (this.addProductForm.controls.productOptions.value) {
       let selectOptions = this.addProductForm.controls.productOptions.value
       for (let i = 0; i < selectOptions.length; i++) {
@@ -169,6 +200,14 @@ export class EditProductComponent implements OnInit {
         })
 
       }
+
+
+      selectedOptions = selectedOptions.map(ele => {
+        return {
+          optionId: ele.optionId.id,
+          price: 0
+        }
+      })
 
     }
 
@@ -189,9 +228,9 @@ export class EditProductComponent implements OnInit {
       isActive: (this.addProductForm.controls.available.value == 'available' || this.addProductForm.controls.available.value == `true`) ? true : false,
 
       defaultPhotoId: this.imagesList.length ? this.imagesList[0].photoId : this.product.defaultPhotoId,
-      categoryId: this.addProductForm.controls.category.value,
+      categoryId: this.addProductForm.controls.subcategory.value,
       brandId: this.addProductForm.controls.brand.value,
-      vendorId:  "06eff051-2254-4eb7-d4fc-08dbbb387eb9" , //this.userInfo.id,,
+      vendorId: "06eff051-2254-4eb7-d4fc-08dbbb387eb9", //this.userInfo.id,,
       paymentType: "string",
       noteForReturn: this.addProductForm.controls.noteForReturn.value || 'string',
       amount: this.addProductForm.controls.amount.value,
@@ -203,18 +242,15 @@ export class EditProductComponent implements OnInit {
 
     }
     this._ProductService.updateProduct(data).subscribe(res => {
-      console.log({ res });
+      this.load = false
       this._Router.navigateByUrl("/admin/product")
     },
       err => {
-        console.log({ err });
-
+        this.load = false;
+        this.showSideError(`Fail to update your product`)
       }
     )
   }
-
-
-
 
 
   ngOnInit(): void {
@@ -224,6 +260,5 @@ export class EditProductComponent implements OnInit {
 
   closeProductDetailsSec() {
     this._Router.navigateByUrl(`admin/product`)
-
   }
 }
